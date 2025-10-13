@@ -614,7 +614,6 @@ double DAClusterizerInZ_vect::beta0(double betamax, track_t const& tks, vertex_t
       sumwz += w * tks.zpca[i];
       sumw += w;
     }
-
     y.zvtx[k] = sumwz / sumw;
 
     // estimate Tcrit
@@ -625,8 +624,8 @@ double DAClusterizerInZ_vect::beta0(double betamax, track_t const& tks, vertex_t
       a += w * std::pow(dx, 2) * tks.dz2[i];
       b += w;
     }
-    double Tc = 2. * a / b;  // the critical temperature of this vertex
 
+    double Tc = 2. * a / b;  // the critical temperature of this vertex
     if (Tc > T0)
       T0 = Tc;
 
@@ -961,6 +960,8 @@ vector<TransientVertex> DAClusterizerInZ_vect::vertices_in_blocks(const vector<r
     unsigned int end = (unsigned int)std::min(begin + block_size_, (unsigned int)sorted_tracks.size());
     for (unsigned int i = begin; i < end; i++) {
       block_tracks.push_back(sorted_tracks[i]);
+
+      if (i == (end-1)){printf("Last track in block in z: %1.5f\n", sorted_tracks[i].stateAtBeamLine().trackStateAtPCA().position().z());}
     }
     if (block_tracks.empty()) {
       continue;
@@ -1219,7 +1220,7 @@ vector<TransientVertex> DAClusterizerInZ_vect::vertices_in_blocks(const vector<r
 
   GlobalError dummyError(0.01, 0, 0.01, 0., 0., 0.01);
   vector<reco::TransientTrack> vertexTracks;
-
+  bool previousGood = false;
   for (unsigned int k = 0; k < nv; k++) {
     if (!vtx_track_indices[k].empty()) {
       for (auto i : vtx_track_indices[k]) {
@@ -1232,13 +1233,15 @@ vector<TransientVertex> DAClusterizerInZ_vect::vertices_in_blocks(const vector<r
     }
 
     // implement what clusterize() did before : merge left-to-right if distance < 2 * vertexSize_
-    if ((k + 1 == nv) || (abs(vertices_tot[k + 1].first - vertices_tot[k].first) > (2 * vertexSize_))) {
+    if ((k + 1 == nv) || (abs(vertices_tot[k + 1].first - vertices_tot[k].first) > (2 * vertexSize_)) || not(previousGood) ) { // If the previous was not good we don't compare with it
       // close a cluster
       if (vertexTracks.size() > 1) {
         GlobalPoint pos(0, 0, vertices_tot[k].first);  // only usable with subsequent fit
         TransientVertex v(pos, dummyError, vertexTracks, 0);
         clusters.push_back(v);
+	previousGood = true;
       }
+      else { previousGood = false; }
       vertexTracks.clear();
     }
   }
