@@ -1,0 +1,720 @@
+%MSG-i AlpakaService:  (NoModuleName) 12-Mar-2026 09:46:33 CET pre-events
+AlpakaServiceSerialSync succesfully initialised.
+Found 1 device:
+  - Intel(R) Xeon(R) CPU E5-2680 v4 @ 2.40GHz
+%MSG
+12-Mar-2026 09:46:37 CET  Initiating request to open file root://eoscms.cern.ch//eos/cms/store/relval/CMSSW_15_0_0/RelValZMM_14/GEN-SIM-RECO/PU_141X_mcRun4_realistic_v3_STD_Run4D110_PU-v3/2580000/ef8f7d98-ed43-4202-96da-854599b13ae0.root
+TLS: Unable to use cert+key file ; does not exist.
+[2026-03-12 09:46:37.512663 +0100][Error  ][TlsMsg            ] Failed to initialize TLS context: Unable to use cert+key file ; does not exist.
+12-Mar-2026 09:47:31 CET  Successfully opened file root://eoscms.cern.ch//eos/cms/store/relval/CMSSW_15_0_0/RelValZMM_14/GEN-SIM-RECO/PU_141X_mcRun4_realistic_v3_STD_Run4D110_PU-v3/2580000/ef8f7d98-ed43-4202-96da-854599b13ae0.root
+Begin processing the 1st record. Run 1, Event 12601, LumiSection 127 on stream 0 at 12-Mar-2026 09:47:42.625 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:47:45 CET Run: 1 Event: 12601
+No vertex found with 3150 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:47:45 CET Run: 1 Event: 12601
+No vertex found with 3150 tracks and 0 vertex candidates
+%MSG
+Begin processing the 2nd record. Run 1, Event 12603, LumiSection 127 on stream 0 at 12-Mar-2026 09:47:46.717 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:47:47 CET Run: 1 Event: 12603
+No vertex found with 3061 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:47:47 CET Run: 1 Event: 12603
+No vertex found with 3061 tracks and 0 vertex candidates
+%MSG
+Begin processing the 3rd record. Run 1, Event 12604, LumiSection 127 on stream 0 at 12-Mar-2026 09:47:47.875 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:47:48 CET Run: 1 Event: 12604
+No vertex found with 3073 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:47:48 CET Run: 1 Event: 12604
+No vertex found with 3073 tracks and 0 vertex candidates
+%MSG
+Begin processing the 4th record. Run 1, Event 12605, LumiSection 127 on stream 0 at 12-Mar-2026 09:47:50.129 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:47:51 CET Run: 1 Event: 12605
+No vertex found with 3136 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:47:51 CET Run: 1 Event: 12605
+No vertex found with 3136 tracks and 0 vertex candidates
+%MSG
+Begin processing the 5th record. Run 1, Event 12606, LumiSection 127 on stream 0 at 12-Mar-2026 09:47:51.380 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:47:52 CET Run: 1 Event: 12606
+No vertex found with 3289 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:47:52 CET Run: 1 Event: 12606
+No vertex found with 3289 tracks and 0 vertex candidates
+%MSG
+Begin processing the 6th record. Run 1, Event 12607, LumiSection 127 on stream 0 at 12-Mar-2026 09:47:53.268 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:47:54 CET Run: 1 Event: 12607
+No vertex found with 3470 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:47:54 CET Run: 1 Event: 12607
+No vertex found with 3470 tracks and 0 vertex candidates
+%MSG
+Begin processing the 7th record. Run 1, Event 12608, LumiSection 127 on stream 0 at 12-Mar-2026 09:47:54.495 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:47:55 CET Run: 1 Event: 12608
+No vertex found with 3012 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:47:55 CET Run: 1 Event: 12608
+No vertex found with 3012 tracks and 0 vertex candidates
+%MSG
+Begin processing the 8th record. Run 1, Event 12609, LumiSection 127 on stream 0 at 12-Mar-2026 09:47:56.217 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:47:57 CET Run: 1 Event: 12609
+No vertex found with 3274 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:47:57 CET Run: 1 Event: 12609
+No vertex found with 3274 tracks and 0 vertex candidates
+%MSG
+Begin processing the 9th record. Run 1, Event 12610, LumiSection 127 on stream 0 at 12-Mar-2026 09:47:57.508 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:47:58 CET Run: 1 Event: 12610
+No vertex found with 4623 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:47:58 CET Run: 1 Event: 12610
+No vertex found with 4623 tracks and 0 vertex candidates
+%MSG
+Begin processing the 10th record. Run 1, Event 12611, LumiSection 127 on stream 0 at 12-Mar-2026 09:47:59.266 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:00 CET Run: 1 Event: 12611
+No vertex found with 3230 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:00 CET Run: 1 Event: 12611
+No vertex found with 3230 tracks and 0 vertex candidates
+%MSG
+Begin processing the 11th record. Run 1, Event 12612, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:00.527 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:01 CET Run: 1 Event: 12612
+No vertex found with 3166 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:01 CET Run: 1 Event: 12612
+No vertex found with 3166 tracks and 0 vertex candidates
+%MSG
+Begin processing the 12th record. Run 1, Event 12615, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:02.072 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:03 CET Run: 1 Event: 12615
+No vertex found with 3367 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:03 CET Run: 1 Event: 12615
+No vertex found with 3367 tracks and 0 vertex candidates
+%MSG
+Begin processing the 13th record. Run 1, Event 12616, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:03.321 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:04 CET Run: 1 Event: 12616
+No vertex found with 3687 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:04 CET Run: 1 Event: 12616
+No vertex found with 3687 tracks and 0 vertex candidates
+%MSG
+Begin processing the 14th record. Run 1, Event 12617, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:05.249 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:06 CET Run: 1 Event: 12617
+No vertex found with 3393 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:06 CET Run: 1 Event: 12617
+No vertex found with 3393 tracks and 0 vertex candidates
+%MSG
+Begin processing the 15th record. Run 1, Event 12618, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:06.496 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:07 CET Run: 1 Event: 12618
+No vertex found with 3474 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:07 CET Run: 1 Event: 12618
+No vertex found with 3474 tracks and 0 vertex candidates
+%MSG
+Begin processing the 16th record. Run 1, Event 12619, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:08.013 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:09 CET Run: 1 Event: 12619
+No vertex found with 3537 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:09 CET Run: 1 Event: 12619
+No vertex found with 3537 tracks and 0 vertex candidates
+%MSG
+Begin processing the 17th record. Run 1, Event 12620, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:09.330 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:10 CET Run: 1 Event: 12620
+No vertex found with 3624 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:10 CET Run: 1 Event: 12620
+No vertex found with 3624 tracks and 0 vertex candidates
+%MSG
+Begin processing the 18th record. Run 1, Event 12622, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:10.708 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:11 CET Run: 1 Event: 12622
+No vertex found with 3046 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:11 CET Run: 1 Event: 12622
+No vertex found with 3046 tracks and 0 vertex candidates
+%MSG
+Begin processing the 19th record. Run 1, Event 12623, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:12.022 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:13 CET Run: 1 Event: 12623
+No vertex found with 3485 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:13 CET Run: 1 Event: 12623
+No vertex found with 3485 tracks and 0 vertex candidates
+%MSG
+Begin processing the 20th record. Run 1, Event 12624, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:13.567 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:14 CET Run: 1 Event: 12624
+No vertex found with 3412 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:14 CET Run: 1 Event: 12624
+No vertex found with 3412 tracks and 0 vertex candidates
+%MSG
+Begin processing the 21st record. Run 1, Event 12625, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:14.868 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:16 CET Run: 1 Event: 12625
+No vertex found with 3406 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:16 CET Run: 1 Event: 12625
+No vertex found with 3406 tracks and 0 vertex candidates
+%MSG
+Begin processing the 22nd record. Run 1, Event 12627, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:16.667 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:17 CET Run: 1 Event: 12627
+No vertex found with 3276 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:17 CET Run: 1 Event: 12627
+No vertex found with 3276 tracks and 0 vertex candidates
+%MSG
+Begin processing the 23rd record. Run 1, Event 12629, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:17.921 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:19 CET Run: 1 Event: 12629
+No vertex found with 2734 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:19 CET Run: 1 Event: 12629
+No vertex found with 2734 tracks and 0 vertex candidates
+%MSG
+Begin processing the 24th record. Run 1, Event 12630, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:19.417 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:20 CET Run: 1 Event: 12630
+No vertex found with 3390 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:20 CET Run: 1 Event: 12630
+No vertex found with 3390 tracks and 0 vertex candidates
+%MSG
+Begin processing the 25th record. Run 1, Event 12633, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:20.676 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:21 CET Run: 1 Event: 12633
+No vertex found with 3421 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:21 CET Run: 1 Event: 12633
+No vertex found with 3421 tracks and 0 vertex candidates
+%MSG
+Begin processing the 26th record. Run 1, Event 12634, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:22.091 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:23 CET Run: 1 Event: 12634
+No vertex found with 3760 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:23 CET Run: 1 Event: 12634
+No vertex found with 3760 tracks and 0 vertex candidates
+%MSG
+Begin processing the 27th record. Run 1, Event 12635, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:23.544 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:24 CET Run: 1 Event: 12635
+No vertex found with 2654 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:24 CET Run: 1 Event: 12635
+No vertex found with 2654 tracks and 0 vertex candidates
+%MSG
+Begin processing the 28th record. Run 1, Event 12636, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:25.250 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:26 CET Run: 1 Event: 12636
+No vertex found with 4021 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:26 CET Run: 1 Event: 12636
+No vertex found with 4021 tracks and 0 vertex candidates
+%MSG
+Begin processing the 29th record. Run 1, Event 12637, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:26.630 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:27 CET Run: 1 Event: 12637
+No vertex found with 3011 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:27 CET Run: 1 Event: 12637
+No vertex found with 3011 tracks and 0 vertex candidates
+%MSG
+Begin processing the 30th record. Run 1, Event 12638, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:28.245 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:29 CET Run: 1 Event: 12638
+No vertex found with 3438 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:29 CET Run: 1 Event: 12638
+No vertex found with 3438 tracks and 0 vertex candidates
+%MSG
+Begin processing the 31st record. Run 1, Event 12639, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:29.462 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:30 CET Run: 1 Event: 12639
+No vertex found with 3424 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:30 CET Run: 1 Event: 12639
+No vertex found with 3424 tracks and 0 vertex candidates
+%MSG
+Begin processing the 32nd record. Run 1, Event 12640, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:30.734 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:31 CET Run: 1 Event: 12640
+No vertex found with 2902 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:31 CET Run: 1 Event: 12640
+No vertex found with 2902 tracks and 0 vertex candidates
+%MSG
+Begin processing the 33rd record. Run 1, Event 12641, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:31.934 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:33 CET Run: 1 Event: 12641
+No vertex found with 3176 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:33 CET Run: 1 Event: 12641
+No vertex found with 3176 tracks and 0 vertex candidates
+%MSG
+Begin processing the 34th record. Run 1, Event 12642, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:33.521 CET
+%MSG-w XrdAdaptorLvl3:  PreProcPath vertexing_step 12-Mar-2026 09:48:33 CET  Run: 1 Event: 12642
+Deactivating st-096-100gb060.cern.ch from active sources because its quality (265) is higher than 260 and 4 times larger than the other active server st-096-100gb-ip303-972ee.cern.ch (22) 
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:34 CET Run: 1 Event: 12642
+No vertex found with 3315 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:34 CET Run: 1 Event: 12642
+No vertex found with 3315 tracks and 0 vertex candidates
+%MSG
+Begin processing the 35th record. Run 1, Event 12643, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:34.760 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:36 CET Run: 1 Event: 12643
+No vertex found with 3079 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:36 CET Run: 1 Event: 12643
+No vertex found with 3079 tracks and 0 vertex candidates
+%MSG
+Begin processing the 36th record. Run 1, Event 12644, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:36.329 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:37 CET Run: 1 Event: 12644
+No vertex found with 3418 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:37 CET Run: 1 Event: 12644
+No vertex found with 3418 tracks and 0 vertex candidates
+%MSG
+Begin processing the 37th record. Run 1, Event 12645, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:37.588 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:38 CET Run: 1 Event: 12645
+No vertex found with 2986 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:38 CET Run: 1 Event: 12645
+No vertex found with 2986 tracks and 0 vertex candidates
+%MSG
+Begin processing the 38th record. Run 1, Event 12646, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:39.111 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:40 CET Run: 1 Event: 12646
+No vertex found with 2642 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:40 CET Run: 1 Event: 12646
+No vertex found with 2642 tracks and 0 vertex candidates
+%MSG
+Begin processing the 39th record. Run 1, Event 12647, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:40.271 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:41 CET Run: 1 Event: 12647
+No vertex found with 2953 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:41 CET Run: 1 Event: 12647
+No vertex found with 2953 tracks and 0 vertex candidates
+%MSG
+Begin processing the 40th record. Run 1, Event 12648, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:41.655 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:42 CET Run: 1 Event: 12648
+No vertex found with 3134 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:42 CET Run: 1 Event: 12648
+No vertex found with 3134 tracks and 0 vertex candidates
+%MSG
+Begin processing the 41st record. Run 1, Event 12649, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:42.903 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:44 CET Run: 1 Event: 12649
+No vertex found with 2940 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:44 CET Run: 1 Event: 12649
+No vertex found with 2940 tracks and 0 vertex candidates
+%MSG
+Begin processing the 42nd record. Run 1, Event 12650, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:44.551 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:45 CET Run: 1 Event: 12650
+No vertex found with 3221 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:45 CET Run: 1 Event: 12650
+No vertex found with 3221 tracks and 0 vertex candidates
+%MSG
+Begin processing the 43rd record. Run 1, Event 12654, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:45.800 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:47 CET Run: 1 Event: 12654
+No vertex found with 3774 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:47 CET Run: 1 Event: 12654
+No vertex found with 3774 tracks and 0 vertex candidates
+%MSG
+Begin processing the 44th record. Run 1, Event 12655, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:47.300 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:48 CET Run: 1 Event: 12655
+No vertex found with 2783 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:48 CET Run: 1 Event: 12655
+No vertex found with 2783 tracks and 0 vertex candidates
+%MSG
+Begin processing the 45th record. Run 1, Event 12657, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:48.393 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:49 CET Run: 1 Event: 12657
+No vertex found with 3606 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:49 CET Run: 1 Event: 12657
+No vertex found with 3606 tracks and 0 vertex candidates
+%MSG
+Begin processing the 46th record. Run 1, Event 12658, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:49.911 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:51 CET Run: 1 Event: 12658
+No vertex found with 3347 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:51 CET Run: 1 Event: 12658
+No vertex found with 3347 tracks and 0 vertex candidates
+%MSG
+Begin processing the 47th record. Run 1, Event 12659, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:51.166 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:52 CET Run: 1 Event: 12659
+No vertex found with 3435 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:52 CET Run: 1 Event: 12659
+No vertex found with 3435 tracks and 0 vertex candidates
+%MSG
+Begin processing the 48th record. Run 1, Event 12660, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:52.654 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:53 CET Run: 1 Event: 12660
+No vertex found with 3528 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:53 CET Run: 1 Event: 12660
+No vertex found with 3528 tracks and 0 vertex candidates
+%MSG
+Begin processing the 49th record. Run 1, Event 12661, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:53.908 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:55 CET Run: 1 Event: 12661
+No vertex found with 2846 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:55 CET Run: 1 Event: 12661
+No vertex found with 2846 tracks and 0 vertex candidates
+%MSG
+Begin processing the 50th record. Run 1, Event 12662, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:55.298 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:56 CET Run: 1 Event: 12662
+No vertex found with 3758 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:56 CET Run: 1 Event: 12662
+No vertex found with 3758 tracks and 0 vertex candidates
+%MSG
+Begin processing the 51st record. Run 1, Event 12663, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:56.619 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:57 CET Run: 1 Event: 12663
+No vertex found with 3462 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:57 CET Run: 1 Event: 12663
+No vertex found with 3462 tracks and 0 vertex candidates
+%MSG
+Begin processing the 52nd record. Run 1, Event 12664, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:58.141 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:59 CET Run: 1 Event: 12664
+No vertex found with 3386 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:48:59 CET Run: 1 Event: 12664
+No vertex found with 3386 tracks and 0 vertex candidates
+%MSG
+Begin processing the 53rd record. Run 1, Event 12665, LumiSection 127 on stream 0 at 12-Mar-2026 09:48:59.389 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:00 CET Run: 1 Event: 12665
+No vertex found with 2861 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:00 CET Run: 1 Event: 12665
+No vertex found with 2861 tracks and 0 vertex candidates
+%MSG
+Begin processing the 54th record. Run 1, Event 12666, LumiSection 127 on stream 0 at 12-Mar-2026 09:49:01.020 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:02 CET Run: 1 Event: 12666
+No vertex found with 3432 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:02 CET Run: 1 Event: 12666
+No vertex found with 3432 tracks and 0 vertex candidates
+%MSG
+Begin processing the 55th record. Run 1, Event 12667, LumiSection 127 on stream 0 at 12-Mar-2026 09:49:02.357 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:03 CET Run: 1 Event: 12667
+No vertex found with 3323 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:03 CET Run: 1 Event: 12667
+No vertex found with 3323 tracks and 0 vertex candidates
+%MSG
+Begin processing the 56th record. Run 1, Event 12668, LumiSection 127 on stream 0 at 12-Mar-2026 09:49:03.897 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:05 CET Run: 1 Event: 12668
+No vertex found with 3033 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:05 CET Run: 1 Event: 12668
+No vertex found with 3033 tracks and 0 vertex candidates
+%MSG
+Begin processing the 57th record. Run 1, Event 12669, LumiSection 127 on stream 0 at 12-Mar-2026 09:49:05.142 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:06 CET Run: 1 Event: 12669
+No vertex found with 3794 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:06 CET Run: 1 Event: 12669
+No vertex found with 3794 tracks and 0 vertex candidates
+%MSG
+Begin processing the 58th record. Run 1, Event 12670, LumiSection 127 on stream 0 at 12-Mar-2026 09:49:06.640 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:07 CET Run: 1 Event: 12670
+No vertex found with 4188 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:07 CET Run: 1 Event: 12670
+No vertex found with 4188 tracks and 0 vertex candidates
+%MSG
+Begin processing the 59th record. Run 1, Event 12671, LumiSection 127 on stream 0 at 12-Mar-2026 09:49:07.920 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:09 CET Run: 1 Event: 12671
+No vertex found with 2785 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:09 CET Run: 1 Event: 12671
+No vertex found with 2785 tracks and 0 vertex candidates
+%MSG
+Begin processing the 60th record. Run 1, Event 12672, LumiSection 127 on stream 0 at 12-Mar-2026 09:49:09.370 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:10 CET Run: 1 Event: 12672
+No vertex found with 2868 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:10 CET Run: 1 Event: 12672
+No vertex found with 2868 tracks and 0 vertex candidates
+%MSG
+Begin processing the 61st record. Run 1, Event 12674, LumiSection 127 on stream 0 at 12-Mar-2026 09:49:10.663 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:11 CET Run: 1 Event: 12674
+No vertex found with 3081 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:11 CET Run: 1 Event: 12674
+No vertex found with 3081 tracks and 0 vertex candidates
+%MSG
+Begin processing the 62nd record. Run 1, Event 12675, LumiSection 127 on stream 0 at 12-Mar-2026 09:49:12.439 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:13 CET Run: 1 Event: 12675
+No vertex found with 4138 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:13 CET Run: 1 Event: 12675
+No vertex found with 4138 tracks and 0 vertex candidates
+%MSG
+Begin processing the 63rd record. Run 1, Event 12676, LumiSection 127 on stream 0 at 12-Mar-2026 09:49:13.715 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:14 CET Run: 1 Event: 12676
+No vertex found with 2858 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:14 CET Run: 1 Event: 12676
+No vertex found with 2858 tracks and 0 vertex candidates
+%MSG
+Begin processing the 64th record. Run 1, Event 12677, LumiSection 127 on stream 0 at 12-Mar-2026 09:49:15.210 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:16 CET Run: 1 Event: 12677
+No vertex found with 2916 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:16 CET Run: 1 Event: 12677
+No vertex found with 2916 tracks and 0 vertex candidates
+%MSG
+Begin processing the 65th record. Run 1, Event 12678, LumiSection 127 on stream 0 at 12-Mar-2026 09:49:16.350 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:17 CET Run: 1 Event: 12678
+No vertex found with 3177 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:17 CET Run: 1 Event: 12678
+No vertex found with 3177 tracks and 0 vertex candidates
+%MSG
+Begin processing the 66th record. Run 1, Event 12679, LumiSection 127 on stream 0 at 12-Mar-2026 09:49:17.653 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:18 CET Run: 1 Event: 12679
+No vertex found with 3118 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:18 CET Run: 1 Event: 12679
+No vertex found with 3118 tracks and 0 vertex candidates
+%MSG
+Begin processing the 67th record. Run 1, Event 12680, LumiSection 127 on stream 0 at 12-Mar-2026 09:49:18.808 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:20 CET Run: 1 Event: 12680
+No vertex found with 3379 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:20 CET Run: 1 Event: 12680
+No vertex found with 3379 tracks and 0 vertex candidates
+%MSG
+Begin processing the 68th record. Run 1, Event 12681, LumiSection 127 on stream 0 at 12-Mar-2026 09:49:20.387 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:21 CET Run: 1 Event: 12681
+No vertex found with 2980 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:21 CET Run: 1 Event: 12681
+No vertex found with 2980 tracks and 0 vertex candidates
+%MSG
+Begin processing the 69th record. Run 1, Event 12682, LumiSection 127 on stream 0 at 12-Mar-2026 09:49:21.804 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:23 CET Run: 1 Event: 12682
+No vertex found with 3182 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:23 CET Run: 1 Event: 12682
+No vertex found with 3182 tracks and 0 vertex candidates
+%MSG
+Begin processing the 70th record. Run 1, Event 12683, LumiSection 127 on stream 0 at 12-Mar-2026 09:49:23.306 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:24 CET Run: 1 Event: 12683
+No vertex found with 3776 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:24 CET Run: 1 Event: 12683
+No vertex found with 3776 tracks and 0 vertex candidates
+%MSG
+Begin processing the 71st record. Run 1, Event 12684, LumiSection 127 on stream 0 at 12-Mar-2026 09:49:24.541 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:25 CET Run: 1 Event: 12684
+No vertex found with 3723 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:25 CET Run: 1 Event: 12684
+No vertex found with 3723 tracks and 0 vertex candidates
+%MSG
+Begin processing the 72nd record. Run 1, Event 12685, LumiSection 127 on stream 0 at 12-Mar-2026 09:49:26.028 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:27 CET Run: 1 Event: 12685
+No vertex found with 3125 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:27 CET Run: 1 Event: 12685
+No vertex found with 3125 tracks and 0 vertex candidates
+%MSG
+Begin processing the 73rd record. Run 1, Event 12686, LumiSection 127 on stream 0 at 12-Mar-2026 09:49:27.278 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:28 CET Run: 1 Event: 12686
+No vertex found with 3125 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:28 CET Run: 1 Event: 12686
+No vertex found with 3125 tracks and 0 vertex candidates
+%MSG
+Begin processing the 74th record. Run 1, Event 12690, LumiSection 127 on stream 0 at 12-Mar-2026 09:49:28.726 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:30 CET Run: 1 Event: 12690
+No vertex found with 3924 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:30 CET Run: 1 Event: 12690
+No vertex found with 3924 tracks and 0 vertex candidates
+%MSG
+Begin processing the 75th record. Run 1, Event 12692, LumiSection 127 on stream 0 at 12-Mar-2026 09:49:30.109 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:31 CET Run: 1 Event: 12692
+No vertex found with 3851 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:31 CET Run: 1 Event: 12692
+No vertex found with 3851 tracks and 0 vertex candidates
+%MSG
+Begin processing the 76th record. Run 1, Event 12693, LumiSection 127 on stream 0 at 12-Mar-2026 09:49:31.574 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:32 CET Run: 1 Event: 12693
+No vertex found with 3950 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:32 CET Run: 1 Event: 12693
+No vertex found with 3950 tracks and 0 vertex candidates
+%MSG
+Begin processing the 77th record. Run 1, Event 12694, LumiSection 127 on stream 0 at 12-Mar-2026 09:49:33.000 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:34 CET Run: 1 Event: 12694
+No vertex found with 3263 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:34 CET Run: 1 Event: 12694
+No vertex found with 3263 tracks and 0 vertex candidates
+%MSG
+Begin processing the 78th record. Run 1, Event 12695, LumiSection 127 on stream 0 at 12-Mar-2026 09:49:34.472 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:35 CET Run: 1 Event: 12695
+No vertex found with 2561 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:35 CET Run: 1 Event: 12695
+No vertex found with 2561 tracks and 0 vertex candidates
+%MSG
+Begin processing the 79th record. Run 1, Event 12696, LumiSection 127 on stream 0 at 12-Mar-2026 09:49:35.643 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:36 CET Run: 1 Event: 12696
+No vertex found with 3410 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:36 CET Run: 1 Event: 12696
+No vertex found with 3410 tracks and 0 vertex candidates
+%MSG
+Begin processing the 80th record. Run 1, Event 12697, LumiSection 127 on stream 0 at 12-Mar-2026 09:49:37.208 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:38 CET Run: 1 Event: 12697
+No vertex found with 4246 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:38 CET Run: 1 Event: 12697
+No vertex found with 4246 tracks and 0 vertex candidates
+%MSG
+Begin processing the 81st record. Run 1, Event 12698, LumiSection 127 on stream 0 at 12-Mar-2026 09:49:38.488 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:39 CET Run: 1 Event: 12698
+No vertex found with 3598 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:39 CET Run: 1 Event: 12698
+No vertex found with 3598 tracks and 0 vertex candidates
+%MSG
+Begin processing the 82nd record. Run 1, Event 12699, LumiSection 127 on stream 0 at 12-Mar-2026 09:49:40.023 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:41 CET Run: 1 Event: 12699
+No vertex found with 3360 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:41 CET Run: 1 Event: 12699
+No vertex found with 3360 tracks and 0 vertex candidates
+%MSG
+Begin processing the 83rd record. Run 1, Event 12700, LumiSection 127 on stream 0 at 12-Mar-2026 09:49:41.337 CET
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:42 CET Run: 1 Event: 12700
+No vertex found with 3649 tracks and 0 vertex candidates
+%MSG
+%MSG-w PrimaryVertexProducer:  PrimaryVertexProducer:offlinePrimaryVertices  12-Mar-2026 09:49:42 CET Run: 1 Event: 12700
+No vertex found with 3649 tracks and 0 vertex candidates
+%MSG
+12-Mar-2026 09:49:42 CET  Closed file root://eoscms.cern.ch//eos/cms/store/relval/CMSSW_15_0_0/RelValZMM_14/GEN-SIM-RECO/PU_141X_mcRun4_realistic_v3_STD_Run4D110_PU-v3/2580000/ef8f7d98-ed43-4202-96da-854599b13ae0.root
+
+TrigReport ---------- Event  Summary ------------
+TrigReport Events total = 83 passed = 83 failed = 0
+
+TrigReport ---------- Path   Summary ------------
+TrigReport  Trig Bit#   Executed     Passed     Failed      Error Name
+TrigReport     1    0         83         83          0          0 vertexing_step
+TrigReport     1    1         83         83          0          0 prevalidation_step
+
+
+TrigReport -------End-Path   Summary ------------
+TrigReport  Trig Bit#   Executed     Passed     Failed      Error Name
+TrigReport     0    0         83         83          0          0 dqmoffline_step
+TrigReport     0    1         83         83          0          0 DQMoutput_step
+TrigReport     0    2         83         83          0          0 output_step
+
+
+TrigReport ---------- Modules in Path: vertexing_step ------------
+TrigReport  Trig Bit#    Visited     Passed     Failed      Error Name
+TrigReport     1    0         83         83          0          0 offlinePrimaryVertices
+
+
+TrigReport ---------- Modules in Path: prevalidation_step ------------
+TrigReport  Trig Bit#    Visited     Passed     Failed      Error Name
+TrigReport     1    0         83         83          0          0 vertexAnalysis
+
+
+TrigReport ------ Modules in End-Path: dqmoffline_step ------------
+TrigReport  Trig Bit#    Visited     Passed     Failed      Error Name
+TrigReport     0    0         83         83          0          0 pvMonitor
+
+
+TrigReport ------ Modules in End-Path: DQMoutput_step ------------
+TrigReport  Trig Bit#    Visited     Passed     Failed      Error Name
+TrigReport     0    0         83         83          0          0 DQMoutput
+
+
+TrigReport ------ Modules in End-Path: output_step ------------
+TrigReport  Trig Bit#    Visited     Passed     Failed      Error Name
+TrigReport     0    0         83         83          0          0 output
+
+
+TrigReport ---------- Module Summary ------------
+TrigReport    Visited   Executed     Passed     Failed      Error Name
+TrigReport         83         83         83          0          0 DQMoutput
+TrigReport         83         83         83          0          0 DQMoutput_step
+TrigReport         83         83         83          0          0 TriggerResults
+TrigReport         83         83         83          0          0 VertexAssociatorByPositionAndTracks
+TrigReport         83         83         83          0          0 dqmoffline_step
+TrigReport         83         83         83          0          0 offlinePrimaryVertices
+TrigReport         83         83         83          0          0 output
+TrigReport         83         83         83          0          0 output_step
+TrigReport         83         83         83          0          0 prevalidation_step
+TrigReport         83         83         83          0          0 pvMonitor
+TrigReport         83         83         83          0          0 vertexAnalysis
+TrigReport         83         83         83          0          0 vertexing_step
+
+
+TimeReport ---------- Event  Summary ---[sec]----
+TimeReport       event loop CPU/event = 1.178394
+TimeReport      event loop Real/event = 1.504250
+TimeReport     sum Streams Real/event = 1.421867
+TimeReport efficiency CPU/Real/thread = 0.783376
+
+TimeReport ---------- Path   Summary ---[Real sec]----
+TimeReport  per event     per exec  Name
+TimeReport   1.255578     1.255578  vertexing_step
+TimeReport   1.255584     1.255584  prevalidation_step
+
+TimeReport  per event     per exec  Name
+
+TimeReport -------End-Path   Summary ---[Real sec]----
+TimeReport  per event     per exec  Name
+TimeReport   1.235939     1.235939  dqmoffline_step
+TimeReport   1.255623     1.255623  DQMoutput_step
+TimeReport   1.257424     1.257424  output_step
+
+TimeReport  per event     per exec  Name
+
+TimeReport ---------- Modules in Path: vertexing_step ---[Real sec]----
+TimeReport  per event    per visit  Name
+TimeReport   0.115754     0.115754  offlinePrimaryVertices
+
+
+TimeReport ---------- Modules in Path: prevalidation_step ---[Real sec]----
+TimeReport  per event    per visit  Name
+TimeReport   0.019626     0.019626  vertexAnalysis
+
+TimeReport  per event    per visit  Name
+
+TimeReport ------ Modules in End-Path: dqmoffline_step ---[Real sec]----
+TimeReport  per event    per visit  Name
+TimeReport   0.000024     0.000024  pvMonitor
+
+
+TimeReport ------ Modules in End-Path: DQMoutput_step ---[Real sec]----
+TimeReport  per event    per visit  Name
+TimeReport   0.000003     0.000003  DQMoutput
+
+
+TimeReport ------ Modules in End-Path: output_step ---[Real sec]----
+TimeReport  per event    per visit  Name
+TimeReport   0.001076     0.001076  output
+
+TimeReport  per event    per visit  Name
+
+TimeReport ---------- Module Summary ---[Real sec]----
+TimeReport  per event     per exec    per visit  Name
+TimeReport   0.000003     0.000003     0.000003  DQMoutput
+TimeReport   0.000002     0.000002     0.000002  DQMoutput_step
+TimeReport   0.000003     0.000003     0.000003  TriggerResults
+TimeReport   0.000027     0.000027     0.000027  VertexAssociatorByPositionAndTracks
+TimeReport   0.000003     0.000003     0.000003  dqmoffline_step
+TimeReport   0.115754     0.115754     0.115754  offlinePrimaryVertices
+TimeReport   0.001076     0.001076     0.001076  output
+TimeReport   0.000005     0.000005     0.000005  output_step
+TimeReport   0.000011     0.000011     0.000011  prevalidation_step
+TimeReport   0.000024     0.000024     0.000024  pvMonitor
+TimeReport   0.019626     0.019626     0.019626  vertexAnalysis
+TimeReport   0.000001     0.000001     0.000001  vertexing_step
+
+TimeReport  per event     per exec    per visit  Name
+
+T---Report end!
+
+

@@ -1,0 +1,186 @@
+%MSG-i AlpakaService:  (NoModuleName) 12-Mar-2026 14:58:50 CET pre-events
+AlpakaServiceSerialSync succesfully initialised.
+Found 1 device:
+  - Intel(R) Xeon(R) Silver 4216 CPU @ 2.10GHz
+%MSG
+12-Mar-2026 14:58:56 CET  Initiating request to open file root://eoscms.cern.ch//eos/cms/store/relval/CMSSW_15_0_0/RelValVBFHZZ4Nu_14TeV/GEN-SIM-RECO/PU_141X_mcRun4_realistic_v3_STD_Run4D110_PU-v3/2580000/6b9d1f32-1fdb-45ff-9f55-fa0241e8ee38.root
+TLS: Unable to use cert+key file ; does not exist.
+[2026-03-12 14:58:56.449390 +0100][Error  ][TlsMsg            ] Failed to initialize TLS context: Unable to use cert+key file ; does not exist.
+12-Mar-2026 15:00:10 CET  Successfully opened file root://eoscms.cern.ch//eos/cms/store/relval/CMSSW_15_0_0/RelValVBFHZZ4Nu_14TeV/GEN-SIM-RECO/PU_141X_mcRun4_realistic_v3_STD_Run4D110_PU-v3/2580000/6b9d1f32-1fdb-45ff-9f55-fa0241e8ee38.root
+Begin processing the 1st record. Run 1, Event 7151, LumiSection 144 on stream 0 at 12-Mar-2026 15:00:33.119 CET
+Begin processing the 2nd record. Run 1, Event 7152, LumiSection 144 on stream 0 at 12-Mar-2026 15:00:39.670 CET
+Begin processing the 3rd record. Run 1, Event 7153, LumiSection 144 on stream 0 at 12-Mar-2026 15:00:42.565 CET
+Begin processing the 4th record. Run 1, Event 7154, LumiSection 144 on stream 0 at 12-Mar-2026 15:00:45.424 CET
+Begin processing the 5th record. Run 1, Event 7155, LumiSection 144 on stream 0 at 12-Mar-2026 15:00:48.213 CET
+Begin processing the 6th record. Run 1, Event 7156, LumiSection 144 on stream 0 at 12-Mar-2026 15:00:50.494 CET
+Begin processing the 7th record. Run 1, Event 7157, LumiSection 144 on stream 0 at 12-Mar-2026 15:00:54.118 CET
+Begin processing the 8th record. Run 1, Event 7158, LumiSection 144 on stream 0 at 12-Mar-2026 15:00:56.598 CET
+Begin processing the 9th record. Run 1, Event 7159, LumiSection 144 on stream 0 at 12-Mar-2026 15:00:59.920 CET
+Begin processing the 10th record. Run 1, Event 7160, LumiSection 144 on stream 0 at 12-Mar-2026 15:01:03.347 CET
+Begin processing the 11th record. Run 1, Event 7161, LumiSection 144 on stream 0 at 12-Mar-2026 15:01:06.046 CET
+Begin processing the 12th record. Run 1, Event 7162, LumiSection 144 on stream 0 at 12-Mar-2026 15:01:08.677 CET
+Begin processing the 13th record. Run 1, Event 7163, LumiSection 144 on stream 0 at 12-Mar-2026 15:01:12.040 CET
+Begin processing the 14th record. Run 1, Event 7164, LumiSection 144 on stream 0 at 12-Mar-2026 15:01:14.821 CET
+Begin processing the 15th record. Run 1, Event 7165, LumiSection 144 on stream 0 at 12-Mar-2026 15:01:17.628 CET
+Begin processing the 16th record. Run 1, Event 7166, LumiSection 144 on stream 0 at 12-Mar-2026 15:01:20.689 CET
+Begin processing the 17th record. Run 1, Event 7167, LumiSection 144 on stream 0 at 12-Mar-2026 15:01:23.101 CET
+Begin processing the 18th record. Run 1, Event 7168, LumiSection 144 on stream 0 at 12-Mar-2026 15:01:25.675 CET
+Begin processing the 19th record. Run 1, Event 7169, LumiSection 144 on stream 0 at 12-Mar-2026 15:01:28.221 CET
+Begin processing the 20th record. Run 1, Event 7170, LumiSection 144 on stream 0 at 12-Mar-2026 15:01:30.444 CET
+Begin processing the 21st record. Run 1, Event 7171, LumiSection 144 on stream 0 at 12-Mar-2026 15:01:32.488 CET
+Begin processing the 22nd record. Run 1, Event 7172, LumiSection 144 on stream 0 at 12-Mar-2026 15:01:34.982 CET
+Begin processing the 23rd record. Run 1, Event 7173, LumiSection 144 on stream 0 at 12-Mar-2026 15:01:37.902 CET
+Begin processing the 24th record. Run 1, Event 7174, LumiSection 144 on stream 0 at 12-Mar-2026 15:01:40.600 CET
+Begin processing the 25th record. Run 1, Event 7175, LumiSection 144 on stream 0 at 12-Mar-2026 15:01:43.218 CET
+Begin processing the 26th record. Run 1, Event 7176, LumiSection 144 on stream 0 at 12-Mar-2026 15:01:45.962 CET
+Begin processing the 27th record. Run 1, Event 7177, LumiSection 144 on stream 0 at 12-Mar-2026 15:01:49.041 CET
+Begin processing the 28th record. Run 1, Event 7178, LumiSection 144 on stream 0 at 12-Mar-2026 15:01:51.648 CET
+Begin processing the 29th record. Run 1, Event 7179, LumiSection 144 on stream 0 at 12-Mar-2026 15:01:54.599 CET
+Begin processing the 30th record. Run 1, Event 7180, LumiSection 144 on stream 0 at 12-Mar-2026 15:01:59.441 CET
+Begin processing the 31st record. Run 1, Event 7181, LumiSection 144 on stream 0 at 12-Mar-2026 15:02:02.950 CET
+Begin processing the 32nd record. Run 1, Event 7182, LumiSection 144 on stream 0 at 12-Mar-2026 15:02:05.095 CET
+Begin processing the 33rd record. Run 1, Event 7183, LumiSection 144 on stream 0 at 12-Mar-2026 15:02:08.408 CET
+Begin processing the 34th record. Run 1, Event 7184, LumiSection 144 on stream 0 at 12-Mar-2026 15:02:11.051 CET
+Begin processing the 35th record. Run 1, Event 7185, LumiSection 144 on stream 0 at 12-Mar-2026 15:02:13.867 CET
+Begin processing the 36th record. Run 1, Event 7186, LumiSection 144 on stream 0 at 12-Mar-2026 15:02:15.958 CET
+Begin processing the 37th record. Run 1, Event 7187, LumiSection 144 on stream 0 at 12-Mar-2026 15:02:18.980 CET
+Begin processing the 38th record. Run 1, Event 7188, LumiSection 144 on stream 0 at 12-Mar-2026 15:02:22.501 CET
+Begin processing the 39th record. Run 1, Event 7189, LumiSection 144 on stream 0 at 12-Mar-2026 15:02:24.996 CET
+Begin processing the 40th record. Run 1, Event 7190, LumiSection 144 on stream 0 at 12-Mar-2026 15:02:27.289 CET
+Begin processing the 41st record. Run 1, Event 7191, LumiSection 144 on stream 0 at 12-Mar-2026 15:02:29.952 CET
+Begin processing the 42nd record. Run 1, Event 7192, LumiSection 144 on stream 0 at 12-Mar-2026 15:02:32.860 CET
+Begin processing the 43rd record. Run 1, Event 7193, LumiSection 144 on stream 0 at 12-Mar-2026 15:02:35.230 CET
+Begin processing the 44th record. Run 1, Event 7194, LumiSection 144 on stream 0 at 12-Mar-2026 15:02:38.287 CET
+Begin processing the 45th record. Run 1, Event 7195, LumiSection 144 on stream 0 at 12-Mar-2026 15:02:41.058 CET
+Begin processing the 46th record. Run 1, Event 7196, LumiSection 144 on stream 0 at 12-Mar-2026 15:02:44.413 CET
+Begin processing the 47th record. Run 1, Event 7197, LumiSection 144 on stream 0 at 12-Mar-2026 15:02:46.783 CET
+Begin processing the 48th record. Run 1, Event 7198, LumiSection 144 on stream 0 at 12-Mar-2026 15:02:48.976 CET
+Begin processing the 49th record. Run 1, Event 7199, LumiSection 144 on stream 0 at 12-Mar-2026 15:02:51.821 CET
+Begin processing the 50th record. Run 1, Event 7200, LumiSection 144 on stream 0 at 12-Mar-2026 15:02:53.981 CET
+12-Mar-2026 15:02:56 CET  Closed file root://eoscms.cern.ch//eos/cms/store/relval/CMSSW_15_0_0/RelValVBFHZZ4Nu_14TeV/GEN-SIM-RECO/PU_141X_mcRun4_realistic_v3_STD_Run4D110_PU-v3/2580000/6b9d1f32-1fdb-45ff-9f55-fa0241e8ee38.root
+
+TrigReport ---------- Event  Summary ------------
+TrigReport Events total = 50 passed = 50 failed = 0
+
+TrigReport ---------- Path   Summary ------------
+TrigReport  Trig Bit#   Executed     Passed     Failed      Error Name
+TrigReport     1    0         50         50          0          0 vertexing_step
+TrigReport     1    1         50         50          0          0 prevalidation_step
+
+
+TrigReport -------End-Path   Summary ------------
+TrigReport  Trig Bit#   Executed     Passed     Failed      Error Name
+TrigReport     0    0         50         50          0          0 dqmoffline_step
+TrigReport     0    1         50         50          0          0 DQMoutput_step
+TrigReport     0    2         50         50          0          0 output_step
+
+
+TrigReport ---------- Modules in Path: vertexing_step ------------
+TrigReport  Trig Bit#    Visited     Passed     Failed      Error Name
+TrigReport     1    0         50         50          0          0 offlinePrimaryVertices
+
+
+TrigReport ---------- Modules in Path: prevalidation_step ------------
+TrigReport  Trig Bit#    Visited     Passed     Failed      Error Name
+TrigReport     1    0         50         50          0          0 vertexAnalysis
+
+
+TrigReport ------ Modules in End-Path: dqmoffline_step ------------
+TrigReport  Trig Bit#    Visited     Passed     Failed      Error Name
+TrigReport     0    0         50         50          0          0 pvMonitor
+
+
+TrigReport ------ Modules in End-Path: DQMoutput_step ------------
+TrigReport  Trig Bit#    Visited     Passed     Failed      Error Name
+TrigReport     0    0         50         50          0          0 DQMoutput
+
+
+TrigReport ------ Modules in End-Path: output_step ------------
+TrigReport  Trig Bit#    Visited     Passed     Failed      Error Name
+TrigReport     0    0         50         50          0          0 output
+
+
+TrigReport ---------- Module Summary ------------
+TrigReport    Visited   Executed     Passed     Failed      Error Name
+TrigReport         50         50         50          0          0 DQMoutput
+TrigReport         50         50         50          0          0 DQMoutput_step
+TrigReport         50         50         50          0          0 TriggerResults
+TrigReport         50         50         50          0          0 VertexAssociatorByPositionAndTracks
+TrigReport         50         50         50          0          0 dqmoffline_step
+TrigReport         50         50         50          0          0 offlinePrimaryVertices
+TrigReport         50         50         50          0          0 output
+TrigReport         50         50         50          0          0 output_step
+TrigReport         50         50         50          0          0 prevalidation_step
+TrigReport         50         50         50          0          0 pvMonitor
+TrigReport         50         50         50          0          0 vertexAnalysis
+TrigReport         50         50         50          0          0 vertexing_step
+
+
+TimeReport ---------- Event  Summary ---[sec]----
+TimeReport       event loop CPU/event = 2.596118
+TimeReport      event loop Real/event = 3.104065
+TimeReport     sum Streams Real/event = 2.812217
+TimeReport efficiency CPU/Real/thread = 0.836361
+
+TimeReport ---------- Path   Summary ---[Real sec]----
+TimeReport  per event     per exec  Name
+TimeReport   2.456250     2.456250  vertexing_step
+TimeReport   2.456256     2.456256  prevalidation_step
+
+TimeReport  per event     per exec  Name
+
+TimeReport -------End-Path   Summary ---[Real sec]----
+TimeReport  per event     per exec  Name
+TimeReport   2.340147     2.340147  dqmoffline_step
+TimeReport   2.456312     2.456312  DQMoutput_step
+TimeReport   2.630737     2.630737  output_step
+
+TimeReport  per event     per exec  Name
+
+TimeReport ---------- Modules in Path: vertexing_step ---[Real sec]----
+TimeReport  per event    per visit  Name
+TimeReport   0.224647     0.224647  offlinePrimaryVertices
+
+
+TimeReport ---------- Modules in Path: prevalidation_step ---[Real sec]----
+TimeReport  per event    per visit  Name
+TimeReport   0.116085     0.116085  vertexAnalysis
+
+TimeReport  per event    per visit  Name
+
+TimeReport ------ Modules in End-Path: dqmoffline_step ---[Real sec]----
+TimeReport  per event    per visit  Name
+TimeReport   0.001102     0.001102  pvMonitor
+
+
+TimeReport ------ Modules in End-Path: DQMoutput_step ---[Real sec]----
+TimeReport  per event    per visit  Name
+TimeReport   0.000004     0.000004  DQMoutput
+
+
+TimeReport ------ Modules in End-Path: output_step ---[Real sec]----
+TimeReport  per event    per visit  Name
+TimeReport   0.010295     0.010295  output
+
+TimeReport  per event    per visit  Name
+
+TimeReport ---------- Module Summary ---[Real sec]----
+TimeReport  per event     per exec    per visit  Name
+TimeReport   0.000004     0.000004     0.000004  DQMoutput
+TimeReport   0.000002     0.000002     0.000002  DQMoutput_step
+TimeReport   0.000003     0.000003     0.000003  TriggerResults
+TimeReport   0.000039     0.000039     0.000039  VertexAssociatorByPositionAndTracks
+TimeReport   0.000008     0.000008     0.000008  dqmoffline_step
+TimeReport   0.224647     0.224647     0.224647  offlinePrimaryVertices
+TimeReport   0.010295     0.010295     0.010295  output
+TimeReport   0.000016     0.000016     0.000016  output_step
+TimeReport   0.000014     0.000014     0.000014  prevalidation_step
+TimeReport   0.001102     0.001102     0.001102  pvMonitor
+TimeReport   0.116085     0.116085     0.116085  vertexAnalysis
+TimeReport   0.000002     0.000002     0.000002  vertexing_step
+
+TimeReport  per event     per exec    per visit  Name
+
+T---Report end!
+
+

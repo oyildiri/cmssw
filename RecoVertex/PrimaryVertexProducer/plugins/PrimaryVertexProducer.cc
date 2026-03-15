@@ -16,6 +16,9 @@
 
 #include "RecoVertex/VertexTools/interface/GeometricAnnealing.h"
 
+#include "RecoVertex/PrimaryVertexProducer/interface/WeightedMeanFitter_GMM.h"
+
+
 PrimaryVertexProducer::PrimaryVertexProducer(const edm::ParameterSet& conf)
     : theTTBToken(esConsumes(edm::ESInputTag("", "TransientTrackBuilder"))), theConfig(conf) {
   fVerbose = conf.getUntrackedParameter<bool>("verbose", false);
@@ -93,6 +96,8 @@ PrimaryVertexProducer::PrimaryVertexProducer(const edm::ParameterSet& conf)
                                                                      true);
     } else if (fitterAlgorithm == "WeightedMeanFitter") {
       algorithm.pv_fitter = new WeightedMeanPrimaryVertexEstimator();
+    } else if (fitterAlgorithm == "WeightedMeanFitter_GMM") {
+      algorithm.pv_fitter = new WeightedMeanPrimaryVertexEstimator_GMM();
     } else {
       throw VertexException("PrimaryVertexProducer: unknown algorithm: " + fitterAlgorithm);
     }
