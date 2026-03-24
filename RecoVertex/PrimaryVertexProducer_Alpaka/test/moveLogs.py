@@ -6,8 +6,12 @@ import time
 import shutil
 from pathlib import Path
 import re
+import glob
 
 user = "oyildiri"
+
+# Types of jobs
+setParam = False # If setting a specific value for a parameter in the algorithm(s) or scanning over that parameter
 
 # Arguments (--inter <inter1> <inter2> --algo <algo1> <algo2>)
 parser = argparse.ArgumentParser()
@@ -24,6 +28,37 @@ parser.add_argument(
 	nargs="+",
 	type=str,
 	help="Algorithm"
+)
+
+parser.add_argument(
+        "--param_min",
+        nargs="+",
+        type=float,
+        help="Minimum value of the set/scanned parameter"
+)
+
+parser.add_argument(
+        "--param_max",
+        nargs="+",
+        type=float,
+        help="Maximum value of the set/scanned parameter"
+)
+
+parser.add_argument(
+        "--param_num",
+        nargs="+",
+        type=float,
+        help="Number of scanned parameter values"
+)
+
+parser.add_argument(
+	"--all",
+	action="store_true"
+)
+
+parser.add_argument(
+	"--sort",
+	action="store_true"
 )
 
 args = parser.parse_args()
@@ -104,49 +139,124 @@ def get_word_in_a_line(x,key,pos):
 # Paths
 mainpath = "/eos/user/o/oyildiri/OldNewCF" # Where the outputs go
 workarea = "/afs/cern.ch/user/o/oyildiri/private/CMS/CMSSW_15_0_4/src/RecoVertex/PrimaryVertexProducer_Alpaka/test" # Wbere the interaction files and algorithm scripts are
+logdir = "/eos/user/o/oyildiri/logfiles/"
 
 # Read arguments
-inter = []
-for i in args.inter:
-	inter.append(i)
-algo = []
-for i in args.algo:
-	algo.append(i)
+if not args.all == True:
+	inter = []
+	for i in args.inter:
+		inter.append(i)
+
+	algo = []
+	for i in args.algo:
+		algo.append(i)
+
+if setParam == True:
+        param_values = []
+        dParam = (args.param_max - args.param_min)/(args.param_num - 1)
+        for i in range(args.param_num):
+                param_values.append(args.param_min + i*dParam)
+
 algo_script = []
 
 # Check validity of algorithm and interaction names as arguments
-for i in algo:
-	if get_algo_script(i) == None:
-		print("Error: %s is not a valid algorithm name."%i)
-		sys.exit(1)
-	else :
-		print("%s algorithm name valid"%i)
+if not args.all == True:
+	for i in algo:
+		if get_algo_script(i) == None:
+			print("Error: %s is not a valid algorithm name."%i)
+			sys.exit(1)
+		else :
+			print("%s algorithm name valid"%i)
 
-for i in inter:
-	if get_inter_file(i) == None:
-		print("Error: %s is not a valid interaction name."%i)
-		sys.exit(1)
-	else :
-		print("%s interaction name valid"%i)
+	for i in inter:
+		if get_inter_file(i) == None:
+			print("Error: %s is not a valid interaction name."%i)
+			sys.exit(1)
+		else :
+			print("%s interaction name valid"%i)
 
 # Move the batchlogs exec and tmp folders
-for i in inter:
-	for a in algo:
-		outPath1 = "%s/%s/%s/outputfiles"%(mainpath,i,a)
-		runPath1 = "%s/run_%s"%(outPath1, str(find_max_run(outPath1,"run_")))
-		try:
-			print("Moving batchlogs%s_%s"%(a,i))
-			shutil.move("%s/batchlogs%s_%s"%(workarea,a,i), "%s"%runPath1)
-		except:
-			pass
-		try:
-			print("Moving exec%s_%s"%(a,i))
-			shutil.move("%s/exec%s_%s"%(workarea,a,i), "%s"%runPath1)
-		except:
-			pass
-		try:
-			print("Moving tmp%s_%s"%(a,i))
-			shutil.move("%s/tmp%s_%s"%(workarea,a,i), "%s"%runPath1)
-		except:
-			pass
+if args.all == True:
+	print("Moving all batchlogs")
+	try:
+		files1 = glob.glob(f"{logdir}batchlogs*")
+		subprocess.run(["rm", "-r", *files1])
+		files = glob.glob(f"{workarea}/batchlogs*")
+		subprocess.run(["mv", *files, logdir])
+	except:
+		pass
+	print("Moving all exec")
+	try:
+		files1 = glob.glob(f"{logdir}exec*")
+		subprocess.run(["rm", "-r", *files1])
+		files = glob.glob(f"{workarea}/exec*")
+		subprocess.run(["mv", *files, logdir])
+	except:
+		pass
+	print("Moving all tmp")
+	try:
+		files1 = glob.glob(f"{logdir}tmp*")
+		subprocess.run(["rm", "-r", *files1])
+		files = glob.glob(f"{workarea}/tmp*")
+		subprocess.run(["mv", *files, logdir])
+	except:
+		pass
 
+else:
+	for i in inter:
+		for a in algo:
+			if setParam == True:
+				for p in param_values:
+					outPath1 = "%s/%s/%s/outputfiles"%(mainpath,i,a)
+					runPath1 = "%s/run_p_%s"%(outPath1, str(p))
+					try:
+						print("Moving batchlogs%s_%s_p_%s"%(a,i,p))
+						if args.sort == True:
+							shutil.move("%s/batchlogs%s_%s_p_%s"%(workarea,a,i,p), "%s"%runPath1)
+						else:
+							shutil.move("%s/batchlogs%s_%s_p_%s"%(workarea,a,i,p), "%s"%logdir)
+					except:
+						pass
+					try:
+						print("Moving exec%s_%s_p_%s"%(a,i,p))
+						if args.sort == True:
+							shutil.move("%s/exec%s_%s_p_%s"%(workarea,a,i,p), "%s"%runPath1)
+						else:
+							shutil.move("%s/exec%s_%s_p_%s"%(workarea,a,i,p), "%s"%logdir)
+					except:
+						pass
+					try:
+						print("Moving tmp%s_%s_p_%s"%(a,i,p))
+						if args.sort == True:
+							shutil.move("%s/tmp%s_%s_p_%s"%(workarea,a,i,p), "%s"%runPath1)
+						else:
+							shutil.move("%s/tmp%s_%s_p_%s"%(workarea,a,i,p), "%s"%logdir)
+					except:
+						pass
+			else:
+				outPath1 = "%s/%s/%s/outputfiles"%(mainpath,i,a)
+				runPath1 = "%s/run_%s"%(outPath1, str(find_max_run(outPath1,"run_")))
+				try:
+					print("Moving batchlogs%s_%s"%(a,i))
+					if args.sort == True:
+						shutil.move("%s/batchlogs%s_%s"%(workarea,a,i), "%s"%runPath1)
+					else:
+						shutil.move("%s/batchlogs%s_%s"%(workarea,a,i), "%s"%logdir)
+				except:
+					pass
+				try:
+					print("Moving exec%s_%s"%(a,i))
+					if args.sort == True:
+						shutil.move("%s/exec%s_%s"%(workarea,a,i), "%s"%runPath1)
+					else:
+						shutil.move("%s/exec%s_%s"%(workarea,a,i), "%s"%logdir)
+				except:
+					pass
+				try:
+					print("Moving tmp%s_%s"%(a,i))
+					if args.sort == True:
+						shutil.move("%s/tmp%s_%s"%(workarea,a,i), "%s"%runPath1)
+					else:
+						shutil.move("%s/tmp%s_%s"%(workarea,a,i), "%s"%logdir)
+				except:
+					pass

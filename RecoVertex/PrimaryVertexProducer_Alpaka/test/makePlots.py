@@ -26,6 +26,30 @@ parser.add_argument(
 	help="Algorithm"
 )
 
+parser.add_argument(
+	"--manual",
+	action="store_true"
+	help="Specify each run for each algorithm and interaction manually?"
+)
+
+parser.add_argument(
+	"--specify_run",
+	action="store_true"
+	help="Specify the runs instead of using the latest ones in each algorithm and interaction?"
+)
+
+parser.add_argument(
+	"--run",
+	nargs="+",
+	type=str,
+	help="Specify the runs (the string that comes after run_)"
+)
+
+parser.add_argument(
+	"--run_path",
+	nargs="+",
+	type=str,
+	help="<inter>/<algo>/<run> ..."
 args = parser.parse_args()
 
 # Funtions
@@ -106,35 +130,52 @@ mainpath = "/eos/user/o/oyildiri/OldNewCF" # Where the outputs go
 workarea = "/afs/cern.ch/user/o/oyildiri/private/CMS/CMSSW_15_0_4/src/RecoVertex/PrimaryVertexProducer_Alpaka/test" # Wbere the interaction files and algorithm scripts are
 
 # Read arguments
-inter = []
-for i in args.inter:
-	inter.append(i)
-algo = []
-for i in args.algo:
-	algo.append(i)
-algo_script = []
+if not args.manual==True:
+	inter = []
+	for i in args.inter:
+		inter.append(i)
+	algo = []
+	for i in args.algo:
+		algo.append(i)
+elif args.manual==True:
+	run_paths = []
+	for i in args.run_path:
+		run_paths.append(i.split("/"))
 
 # Check validity of algorithm and interaction names as arguments
-for i in algo:
-	if get_algo_script(i) == None:
-		print("Error: %s is not a valid algorithm name."%i)
-		sys.exit(1)
-	else :
-		print("%s algorithm name valid"%i)
 
-for i in inter:
-	if get_inter_file(i) == None:
-		print("Error: %s is not a valid interaction name."%i)
-		sys.exit(1)
-	else :
-		print("%s interaction name valid"%i)
+if not args.manual==True:
+	algo_script = []
+	for i in algo:
+		if get_algo_script(i) == None:
+			print("Error: %s is not a valid algorithm name."%i)
+			sys.exit(1)
+		else :
+			print("%s algorithm name valid"%i)
 
+	for i in inter:
+		if get_inter_file(i) == None:
+			print("Error: %s is not a valid interaction name."%i)
+			sys.exit(1)
+		else :
+			print("%s interaction name valid"%i)
 
-for i in inter:
-	paths = []
-	for a in algo:
-		outPath1 = "%s/%s/%s/outputfiles"%(mainpath,i,a)
-		runPath1 = "%s/run_%s"%(outPath1, str(find_max_run(outPath1,"run_")))
+if not args.manual==True:
+	for i in inter:
+		paths = []
+		for a in algo:
+			outPath1 = "%s/%s/%s/outputfiles"%(mainpath,i,a)
+			runPath1 = "%s/run_%s"%(outPath1, str(find_max_run(outPath1,"run_")))
+			paths.append("%s/DQM_V0001_R000000001__Global__CMSSW_X_Y_Z__RECO.root"%runPath1)
+			print(paths)
+		scriptpath="/afs/cern.ch/user/o/oyildiri/private/CMS/CMSSW_15_0_4/bin/el9_amd64_gcc12/makeTrackValidationPlots.py"
+		cmd = ["python3", "%s"%scriptpath] + paths + ["--png", "--extended"]
+		subprocess.run(cmd)
+
+elif args.manual==True:
+	for i in run_paths:
+		outPath1 = "%s/%s/%s/outputfiles"%(mainpath,i[0],i[1])
+		runPath1 = "%s/run_%s"%(outPath1, i[2])
 		paths.append("%s/DQM_V0001_R000000001__Global__CMSSW_X_Y_Z__RECO.root"%runPath1)
 		print(paths)
 	scriptpath="/afs/cern.ch/user/o/oyildiri/private/CMS/CMSSW_15_0_4/bin/el9_amd64_gcc12/makeTrackValidationPlots.py"

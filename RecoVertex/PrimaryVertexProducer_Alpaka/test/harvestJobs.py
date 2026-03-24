@@ -9,6 +9,9 @@ import re
 
 user = "oyildiri"
 
+# Types of jobs
+setParam = True # If setting a specific value for a parameter in the algorithm(s) or scanning over that parameter
+
 # Arguments (--inter <inter1> <inter2> --algo <algo1> <algo2>)
 parser = argparse.ArgumentParser()
 
@@ -26,6 +29,23 @@ parser.add_argument(
 	help="Algorithm"
 )
 
+parser.add_argument(
+        "--param_min",
+        type=float,
+        help="Minimum value of the set/scanned parameter"
+)
+
+parser.add_argument(
+        "--param_max",
+        type=float,
+        help="Maximum value of the set/scanned parameter"
+)
+
+parser.add_argument(
+        "--param_num",
+        type=int,
+        help="Number of scanned parameter values"
+)
 args = parser.parse_args()
 
 # Funtions
@@ -44,7 +64,7 @@ def get_algo_script(x):
              	return None
 
 def get_inter_file(x):
-        if x == "TT" or x == "Z" or x == "VBFHInv" or x == "Upsilon":
+        if x == "TT" or x == "Z" or x == "VBFHInv" or x == "Upsilon" or x == "QCD":
                 return "%s.txt"%x
         else:
              	return None
@@ -129,26 +149,57 @@ for i in inter:
 	else :
 		print("%s interaction name valid"%i)
 
+if setParam == True:
+        param_values = []
+        if args.param_num == 1:
+                param_values.append(args.param_min)
+        else:
+                dParam = (args.param_max - args.param_min)/(args.param_num - 1)
+                for i in range(args.param_num):
+                        param_values.append(args.param_min + i*dParam)
+
 # Make harvest lists
 for i in inter:
 	for a in algo:
-		outPath1 = "%s/%s/%s/outputfiles"%(mainpath,i,a)
-		runPath1 = "%s/run_%s"%(outPath1, str(find_max_run(outPath1,"run_")))
-		subprocess.run(["python3","%s/makeHarvestList.py"%workarea, "%s_%s"%(a,i), "%s"%runPath1, "%s"%runPath1])
+		if setParam == True:
+			for p in param_values:
+				outPath1 = "%s/%s/%s/outputfiles"%(mainpath,i,a)
+				runPath1 = "%s/run_p_%s"%(outPath1, str(p))
+				subprocess.run(["python3","%s/makeHarvestList.py"%workarea, "%s_%s_p_%s"%(a,i,str(p)), "%s"%runPath1, "%s"%runPath1])
+		else:
+			outPath1 = "%s/%s/%s/outputfiles"%(mainpath,i,a)
+			runPath1 = "%s/run_%s"%(outPath1, str(find_max_run(outPath1,"run_")))
+			subprocess.run(["python3","%s/makeHarvestList.py"%workarea, "%s_%s"%(a,i), "%s"%runPath1, "%s"%runPath1])
 # Harvest
 cmssw_path = "/afs/cern.ch/user/o/oyildiri/private/CMS/CMSSW_15_0_4/src"
 for i in inter:
 	for a in algo:
-		outPath1 = "%s/%s/%s/outputfiles"%(mainpath,i,a)
-		runPath1 = "%s/run_%s"%(outPath1, str(find_max_run(outPath1,"run_")))
-		hlist = "%s/%s_%s_HarvestList.txt"%(runPath1,a,i)
-		cmd = f"""
-		cd {cmssw_path}
-		eval "$(scramv1 runtime -sh)"
-		cd {runPath1}
-		cmsRun {workarea}/harvester.py inputFileList={hlist}
-		"""
-		try:
-			subprocess.run(cmd, shell=True, executable="/bin/bash", check=True)
-		except:
-			pass
+		if setParam == True:
+			for p in param_values:
+				outPath1 = "%s/%s/%s/outputfiles"%(mainpath,i,a)
+				runPath1 = "%s/run_p_%s"%(outPath1, str(p))
+				hlist = "%s/%s_%s_p_%s_HarvestList.txt"%(runPath1,a,i,str(p))
+				cmd = f"""
+				cd {cmssw_path}
+				eval "$(scramv1 runtime -sh)"
+				cd {runPath1}
+				cmsRun {workarea}/harvester.py inputFileList={hlist}
+				"""
+				try:
+					subprocess.run(cmd, shell=True, executable="/bin/bash", check=True)
+				except:
+					pass
+		else:
+			outPath1 = "%s/%s/%s/outputfiles"%(mainpath,i,a)
+			runPath1 = "%s/run_%s"%(outPath1, str(find_max_run(outPath1,"run_")))
+			hlist = "%s/%s_%s_HarvestList.txt"%(runPath1,a,i)
+			cmd = f"""
+			cd {cmssw_path}
+			eval "$(scramv1 runtime -sh)"
+			cd {runPath1}
+			cmsRun {workarea}/harvester.py inputFileList={hlist}
+			"""
+			try:
+				subprocess.run(cmd, shell=True, executable="/bin/bash", check=True)
+			except:
+				pass

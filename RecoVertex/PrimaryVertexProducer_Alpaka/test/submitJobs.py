@@ -9,6 +9,9 @@ import re
 
 user = "oyildiri"
 
+# Types of jobs
+setParam = True # If setting a specific value for a parameter in the algorithm(s) or scanning over that parameter
+
 # Arguments (--inter <inter1> <inter2> --algo <algo1> <algo2>)
 parser = argparse.ArgumentParser()
 
@@ -26,6 +29,23 @@ parser.add_argument(
 	help="Algorithm"
 )
 
+parser.add_argument(
+        "--param_min",
+        type=float,
+        help="Minimum value of the set/scanned parameter"
+)
+
+parser.add_argument(
+        "--param_max",
+        type=float,
+        help="Maximum value of the set/scanned parameter"
+)
+
+parser.add_argument(
+        "--param_num",
+        type=int,
+        help="Number of scanned parameter values"
+)
 args = parser.parse_args()
 
 # Funtions
@@ -44,7 +64,7 @@ def get_algo_script(x):
              	return None
 
 def get_inter_file(x):
-        if x == "TT" or x == "Z" or x == "VBFHInv" or x == "Upsilon":
+        if x == "TT" or x == "Z" or x == "VBFHInv" or x == "Upsilon" or x == "QCD":
                 return "%s.txt"%x
         else:
              	return None
@@ -109,12 +129,22 @@ workarea = "/afs/cern.ch/user/o/oyildiri/private/CMS/CMSSW_15_0_4/src/RecoVertex
 inter = []
 for i in args.inter:
 	inter.append(i)
+
 algo = []
 for i in args.algo:
 	algo.append(i)
-algo_script = []
+
+if setParam == True:
+	param_values = []
+	if args.param_num == 1:
+		param_values.append(args.param_min)
+	else:
+		dParam = (args.param_max - args.param_min)/(args.param_num - 1)
+		for i in range(args.param_num):
+			param_values.append(args.param_min + i*dParam)
 
 # Check validity of algorithm and interaction names as arguments
+algo_script = []
 for i in algo:
 	if get_algo_script(i) == None:
 		print("Error: %s is not a valid algorithm name."%i)
@@ -135,16 +165,30 @@ a_i = []
 for i in inter:
 	Path("%s/%s"%(mainpath,i)).mkdir(parents=True, exist_ok=True)
 	for a in algo:
-		a_i.append("%s_%s"%(a,i))
-		# Make the directories
-		outPath = "%s/%s/%s/outputfiles"%(mainpath,i,a)
-		Path(outPath).mkdir(parents=True, exist_ok=True)
-		runPath = "%s/run_%s"%(outPath, str(find_max_run(outPath,"run_")+1))
-		Path(runPath).mkdir(parents=True, exist_ok=True)
-		# Submit the job
-		subprocess.run(["python3","jobSubmit.py","%s_%s"%(a,i), "%s"%workarea, "%s/%s"%(workarea,get_algo_script(a)), "%s/%s"%(workarea, get_inter_file(i)), runPath])
-		result = subprocess.run(["condor_q",user], capture_output=True, text=True)
-		print(get_batchnumber(result))
-		batch_nums.append(get_batchnumber(result))
+		if setParam == True:
+			for p in param_values:
+				a_i.append("%s_%s"%(a,i))
+				# Make the directories
+				outPath = "%s/%s/%s/outputfiles"%(mainpath,i,a)
+				Path(outPath).mkdir(parents=True, exist_ok=True)
+				runPath = "%s/run_p_%s"%(outPath, str(p))
+				Path(runPath).mkdir(parents=True, exist_ok=True)
+				# Submit the job
+				subprocess.run(["python3","jobSubmit.py","%s_%s_p_%s"%(a,i,str(p)), "%s"%workarea, "%s/%s"%(workarea,get_algo_script(a)), "%s/%s"%(workarea, get_inter_file(i)), runPath, str(p)])
+				result = subprocess.run(["condor_q",user], capture_output=True, text=True)
+				print(get_batchnumber(result))
+				batch_nums.append(get_batchnumber(result))
+		else:
+			a_i.append("%s_%s"%(a,i))
+			# Make the directories
+			outPath = "%s/%s/%s/outputfiles"%(mainpath,i,a)
+			Path(outPath).mkdir(parents=True, exist_ok=True)
+			runPath = "%s/run_%s"%(outPath, str(find_max_run(outPath,"run_")+1))
+			Path(runPath).mkdir(parents=True, exist_ok=True)
+			# Submit the job
+			subprocess.run(["python3","jobSubmit.py","%s_%s"%(a,i), "%s"%workarea, "%s/%s"%(workarea,get_algo_script(a)), "%s/%s"%(workarea, get_inter_file(i)), runPath])
+			result = subprocess.run(["condor_q",user], capture_output=True, text=True)
+			print(get_batchnumber(result))
+			batch_nums.append(get_batchnumber(result))
 print(batch_nums)
 

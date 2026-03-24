@@ -1,9 +1,9 @@
 executable              = $(filename)
 arguments               = $(Proxy_path) $(ClusterId)$(ProcId)
-output                  = batchlogsnew2CnewF_VBFHInv/$(ClusterId).$(ProcId).out
-error                   = batchlogsnew2CnewF_VBFHInv/$(ClusterId).$(ProcId).err
-log                     = batchlogsnew2CnewF_VBFHInv/$(ClusterId).log
+output                  = batchlogsnew2CnewF_TT_p_0.15/$(ClusterId).$(ProcId).out
+error                   = batchlogsnew2CnewF_TT_p_0.15/$(ClusterId).$(ProcId).err
+log                     = batchlogsnew2CnewF_TT_p_0.15/$(ClusterId).log
 +JobFlavour = "workday"
 x509userproxy = /afs/cern.ch/user/o/oyildiri/private/x509up_u188570
 
-queue filename matching (execnew2CnewF_VBFHInv/job_*sh)
+queue filename matching (execnew2CnewF_TT_p_0.15/job_*sh)

@@ -4,24 +4,19 @@ from Configuration.Eras.Era_Run3_cff import Run3
 
 import FWCore.ParameterSet.VarParsing as VarParsing
 
-# Modifications
-setParam = True
-setMintrkweight = True
-
 options = VarParsing.VarParsing ('analysis')
 
 # setup any defaults you want
 options.outputFile = 'output.root'
 options.inputFiles = ['input.root']
 options.maxEvents = -1 # -1 means all events
-if setParam == True:
-	options.register(
-        	'param',
-        	0.25,
-		VarParsing.VarParsing.multiplicity.singleton,
-        	VarParsing.VarParsing.varType.float,
-        	'For setting the value of a specific parameter in the algorithm'
-	)
+options.register(
+	'mintrkweight',
+	0.1,
+	VarParsing.VarParsing.multiplicity.singleton,
+	VarParsing.VarParsing.varType.float,
+	'For scanning over mintrkweight'
+)
 options.parseArguments()
 
 process = cms.Process('PV',Run3)
@@ -95,11 +90,7 @@ process.offlinePrimaryVertices = offlinePrimaryVertices
 process.offlinePrimaryVertices.TkClusParameters.TkDAClusParameters.runInBlocks = cms.bool(True)
 process.offlinePrimaryVertices.TkClusParameters.TkDAClusParameters.block_size = cms.uint32(512)
 process.offlinePrimaryVertices.TkClusParameters.TkDAClusParameters.overlap_frac = cms.double(0.5)
-if setMintrkweight == True:
-	process.offlinePrimaryVertices.TkClusParameters.TkDAClusParameters.mintrkweight = cms.double(options.param)
-else:
-	process.offlinePrimaryVertices.TkClusParameters.TkDAClusParameters.mintrkweight = cms.double(0.25)
-
+process.offlinePrimaryVertices.TkClusParameters.TkDAClusParameters.mintrkweight = cms.double(options.mintrkweight) #Setting mintrkweight here
 process.offlinePrimaryVertices.vertexCollections = cms.VPSet(
        [cms.PSet(label=cms.string(""),
            algorithm=cms.string("WeightedMeanFitter"),
