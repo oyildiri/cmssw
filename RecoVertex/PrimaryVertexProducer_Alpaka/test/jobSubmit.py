@@ -76,9 +76,13 @@ for x in range(1, int(NumberOfJobs) + 1):
 		fout.write("cmsenv\n")
 		if setParam == True:
 			for f in jobFiles:
+				fout.write("rm %s\n"%(output + "/" + f.split("/")[-1].replace(".root","_output.root")))
+				fout.write("rm %s\n"%(output + "/" + f.split("/")[-1].replace(".root","_output_DQM.root")))
 				fout.write("cmsRun %s inputFiles=%s outputFile=%s param=%s\n"%(script, f, output + "/" + f.split("/")[-1].replace(".root","_output.root"),param))
 		else: 
 			for f in jobFiles:
+				fout.write("rm %s\n"%(output + "/" + f.split("/")[-1].replace(".root","_output.root")))
+				fout.write("rm %s\n"%(output + "/" + f.split("/")[-1].replace(".root","_output_DQM.root")))
 				fout.write("cmsRun %s inputFiles=%s outputFile=%s\n"%(script, f, output + "/" + f.split("/")[-1].replace(".root","_output.root")))
 		fout.write("echo 'STOP---------------'\n")
 		fout.write("echo\n")

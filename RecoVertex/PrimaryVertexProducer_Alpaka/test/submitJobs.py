@@ -46,6 +46,18 @@ parser.add_argument(
         type=int,
         help="Number of scanned parameter values"
 )
+
+parser.add_argument(
+	"--params",
+	nargs="+",
+	type=float
+)
+
+parser.add_argument(
+	"--omit_first_param",
+	action="store_true"
+)
+
 args = parser.parse_args()
 
 # Funtions
@@ -136,12 +148,18 @@ for i in args.algo:
 
 if setParam == True:
 	param_values = []
-	if args.param_num == 1:
-		param_values.append(args.param_min)
+	if args.params == None:
+		if args.param_num == 1:
+			param_values.append(args.param_min)
+		else:
+			dParam = (args.param_max - args.param_min)/(args.param_num - 1)
+			for i in range(args.param_num):
+				param_values.append(args.param_min + i*dParam)
 	else:
-		dParam = (args.param_max - args.param_min)/(args.param_num - 1)
-		for i in range(args.param_num):
-			param_values.append(args.param_min + i*dParam)
+		param_values = args.params
+
+if args.omit_first_param == True:
+	del param_values[0]
 
 # Check validity of algorithm and interaction names as arguments
 algo_script = []

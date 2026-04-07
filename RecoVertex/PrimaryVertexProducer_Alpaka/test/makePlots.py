@@ -28,13 +28,13 @@ parser.add_argument(
 
 parser.add_argument(
 	"--manual",
-	action="store_true"
+	action="store_true",
 	help="Specify each run for each algorithm and interaction manually?"
 )
 
 parser.add_argument(
 	"--specify_run",
-	action="store_true"
+	action="store_true",
 	help="Specify the runs instead of using the latest ones in each algorithm and interaction?"
 )
 
@@ -50,6 +50,8 @@ parser.add_argument(
 	nargs="+",
 	type=str,
 	help="<inter>/<algo>/<run> ..."
+)
+
 args = parser.parse_args()
 
 # Funtions
@@ -137,6 +139,10 @@ if not args.manual==True:
 	algo = []
 	for i in args.algo:
 		algo.append(i)
+	if args.specify_run==True:
+		runs = []
+		for i in args.run:
+			runs.append(i)
 elif args.manual==True:
 	run_paths = []
 	for i in args.run_path:
@@ -160,7 +166,7 @@ if not args.manual==True:
 		else :
 			print("%s interaction name valid"%i)
 
-if not args.manual==True:
+if not args.manual==True and not args.specify_run==True:
 	for i in inter:
 		paths = []
 		for a in algo:
@@ -168,6 +174,19 @@ if not args.manual==True:
 			runPath1 = "%s/run_%s"%(outPath1, str(find_max_run(outPath1,"run_")))
 			paths.append("%s/DQM_V0001_R000000001__Global__CMSSW_X_Y_Z__RECO.root"%runPath1)
 			print(paths)
+		scriptpath="/afs/cern.ch/user/o/oyildiri/private/CMS/CMSSW_15_0_4/bin/el9_amd64_gcc12/makeTrackValidationPlots.py"
+		cmd = ["python3", "%s"%scriptpath] + paths + ["--png", "--extended"]
+		subprocess.run(cmd)
+
+elif args.specify_run==True:
+	for i in inter:
+		paths = []
+		for a in algo:
+			for r in runs:
+				outPath1 = "%s/%s/%s/outputfiles"%(mainpath,i,a)
+				runPath1 = "%s/run_%s"%(outPath1,r)
+				paths.append("%s/DQM_V0001_R000000001__Global__CMSSW_X_Y_Z__RECO.root"%runPath1)
+				print(paths)
 		scriptpath="/afs/cern.ch/user/o/oyildiri/private/CMS/CMSSW_15_0_4/bin/el9_amd64_gcc12/makeTrackValidationPlots.py"
 		cmd = ["python3", "%s"%scriptpath] + paths + ["--png", "--extended"]
 		subprocess.run(cmd)
