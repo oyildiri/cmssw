@@ -27,29 +27,8 @@ parser.add_argument(
 )
 
 parser.add_argument(
-	"--manual",
-	action="store_true",
-	help="Specify each run for each algorithm and interaction manually?"
-)
-
-parser.add_argument(
-	"--specify_run",
-	action="store_true",
-	help="Specify the runs instead of using the latest ones in each algorithm and interaction?"
-)
-
-parser.add_argument(
-	"--run",
-	nargs="+",
+	"--run_list",
 	type=str,
-	help="Specify the runs (the string that comes after run_)"
-)
-
-parser.add_argument(
-	"--run_path",
-	nargs="+",
-	type=str,
-	help="<inter>/<algo>/<run> ..."
 )
 
 args = parser.parse_args()
@@ -132,25 +111,39 @@ mainpath = "/eos/user/o/oyildiri/OldNewCF" # Where the outputs go
 workarea = "/afs/cern.ch/user/o/oyildiri/private/CMS/CMSSW_15_0_4/src/RecoVertex/PrimaryVertexProducer_Alpaka/test" # Wbere the interaction files and algorithm scripts are
 
 # Read arguments
-if not args.manual==True:
+if args.run_list==None:
 	inter = []
 	for i in args.inter:
 		inter.append(i)
 	algo = []
 	for i in args.algo:
 		algo.append(i)
-	if args.specify_run==True:
-		runs = []
-		for i in args.run:
-			runs.append(i)
-elif args.manual==True:
+else:
 	run_paths = []
-	for i in args.run_path:
-		run_paths.append(i.split("/"))
+	with open("run_p_list.txt", 'r') as file:
+		for line in file:
+			run_paths.append(line.strip())
+	inter_0 = []
+	for r in run_paths:
+		main_pos = r.split("/").index("OldNewCF")
+		inter_0.append(r.split("/")[main_pos+1])
+	inter = sorted(set(inter_0))
+
+	algo_0 = []
+	for r in run_paths:
+		main_pos = r.split("/").index("OldNewCF")
+		algo_0.append(r.split("/")[main_pos+2])
+	algo = sorted(set(algo_0))
+
+	params_0 = []
+	for r in run_paths:
+		main_pos = r.split("/").index("OldNewCF")
+		params_0.append(float(r.split("/")[main_pos+4].removeprefix("run_p_")))
+	params = sorted(set(params_0))
 
 # Check validity of algorithm and interaction names as arguments
 
-if not args.manual==True:
+if args.run_list==None:
 	algo_script = []
 	for i in algo:
 		if get_algo_script(i) == None:
@@ -166,7 +159,6 @@ if not args.manual==True:
 		else :
 			print("%s interaction name valid"%i)
 
-if not args.manual==True and not args.specify_run==True:
 	for i in inter:
 		paths = []
 		for a in algo:
@@ -178,25 +170,15 @@ if not args.manual==True and not args.specify_run==True:
 		cmd = ["python3", "%s"%scriptpath] + paths + ["--png", "--extended"]
 		subprocess.run(cmd)
 
-elif args.specify_run==True:
+else:
+	paths = []
 	for i in inter:
-		paths = []
 		for a in algo:
-			for r in runs:
+			for p in params:
 				outPath1 = "%s/%s/%s/outputfiles"%(mainpath,i,a)
-				runPath1 = "%s/run_%s"%(outPath1,r)
+				runPath1 = "%s/run_p_%s"%(outPath1, p)
 				paths.append("%s/DQM_V0001_R000000001__Global__CMSSW_X_Y_Z__RECO.root"%runPath1)
 				print(paths)
-		scriptpath="/afs/cern.ch/user/o/oyildiri/private/CMS/CMSSW_15_0_4/bin/el9_amd64_gcc12/makeTrackValidationPlots.py"
-		cmd = ["python3", "%s"%scriptpath] + paths + ["--png", "--extended"]
-		subprocess.run(cmd)
-
-elif args.manual==True:
-	for i in run_paths:
-		outPath1 = "%s/%s/%s/outputfiles"%(mainpath,i[0],i[1])
-		runPath1 = "%s/run_%s"%(outPath1, i[2])
-		paths.append("%s/DQM_V0001_R000000001__Global__CMSSW_X_Y_Z__RECO.root"%runPath1)
-		print(paths)
 	scriptpath="/afs/cern.ch/user/o/oyildiri/private/CMS/CMSSW_15_0_4/bin/el9_amd64_gcc12/makeTrackValidationPlots.py"
 	cmd = ["python3", "%s"%scriptpath] + paths + ["--png", "--extended"]
 	subprocess.run(cmd)

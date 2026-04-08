@@ -9,15 +9,35 @@ dp = (param_max - param_min)/(param_num - 1)
 params_given = [0.5555555555555556, 0.6111111111111112, 0.6666666666666666, 0.7222222222222222, 0.7777777777777778, 0.8333333333333333, 0.8888888888888888, 0.9444444444444444, 1.0]
 
 param_manual = False
+runs_from_list = True
 
-#Paraneter
-inter = ["TT"]
-params=[]
-if param_manual == True:
-	params = params_given
+#Parameters
+
+if runs_from_list == True:
+	run_paths=[]
+	with open("run_p_list.txt", 'r') as file:
+		for line in file:
+			run_paths.append(line.strip())
+	inter_0 = []
+	for r in run_paths:
+		main_pos = r.split("/").index("OldNewCF")
+		print(main_pos)
+		inter_0.append(r.split("/")[main_pos+1])
+	inter = sorted(set(inter_0))
+
+	params_0 = []
+	for r in run_paths:
+		main_pos = r.split("/").index("OldNewCF")
+		params_0.append(float(r.split("/")[main_pos+4].removeprefix("run_p_")))
+	params = sorted(set(params_0))
 else:
-	for i in range(param_num):
-		params.append(param_min + i*dp)
+	inter = ["TT"]
+	params=[]
+	if param_manual == True:
+		params = params_given
+	else:
+		for i in range(param_num):
+			params.append(param_min + i*dp)
 
 print("MINTRKWEIGHT VALUES")
 print("")
@@ -29,12 +49,17 @@ print("----------------------------------------------")
 e_globs = []
 for i in inter:
 	for p in params:
-		f = ROOT.TFile.Open("/eos/user/o/oyildiri/OldNewCF/%s/new2CnewF/outputfiles/run_p_%s/DQM_V0001_R000000001__Global__CMSSW_X_Y_Z__RECO.root"%(i,str(p)))
+		try:
+			f = ROOT.TFile.Open("/eos/user/o/oyildiri/OldNewCF/%s/new2CnewF/outputfiles/run_p_%s/DQM_V0001_R000000001__Global__CMSSW_X_Y_Z__RECO.root"%(i,str(p)))
+		except:
+			e_globs.append(np.nan)
+			continue
 		h_N = f.Get("DQMData/Run 1/Vertexing/Run summary/PrimaryVertexV/offlinePrimaryVertices/GenAllAssoc2RecoMatched_NumTracks")
 		h_eff = f.Get("DQMData/Run 1/Vertexing/Run summary/PrimaryVertexV/offlinePrimaryVertices/effic_vs_NumTracks")
 
 		num = 0
 		denom = 0
+		print(p)
 		for j in range(0, h_N.GetNbinsX()+2):
 			N =  h_N.GetBinContent(j)
 			eff = h_eff.GetBinContent(j)
@@ -53,7 +78,11 @@ print("----------------------------------------------")
 f_globs = []
 for i in inter:
 	for p in params:
-		f = ROOT.TFile.Open("/eos/user/o/oyildiri/OldNewCF/%s/new2CnewF/outputfiles/run_p_%s/DQM_V0001_R000000001__Global__CMSSW_X_Y_Z__RECO.root"%(i,str(p)))
+		try:
+			f = ROOT.TFile.Open("/eos/user/o/oyildiri/OldNewCF/%s/new2CnewF/outputfiles/run_p_%s/DQM_V0001_R000000001__Global__CMSSW_X_Y_Z__RECO.root"%(i,str(p)))
+		except:
+			f_globs.append(np.nan)
+			continue
 		h_Nrec = f.Get("DQMData/Run 1/Vertexing/Run summary/PrimaryVertexV/offlinePrimaryVertices/RecoAllAssoc2Gen_NumTracks")
 		h_fake = f.Get("DQMData/Run 1/Vertexing/Run summary/PrimaryVertexV/offlinePrimaryVertices/fakerate_vs_NumTracks")
 
@@ -80,7 +109,13 @@ RecNoIdFrac = []
 
 for i in inter:
 	for p in params:
-		f = ROOT.TFile.Open("/eos/user/o/oyildiri/OldNewCF/%s/new2CnewF/outputfiles/run_p_%s/DQM_V0001_R000000001__Global__CMSSW_X_Y_Z__RECO.root"%(i,str(p)))
+		try:
+			f = ROOT.TFile.Open("/eos/user/o/oyildiri/OldNewCF/%s/new2CnewF/outputfiles/run_p_%s/DQM_V0001_R000000001__Global__CMSSW_X_Y_Z__RECO.root"%(i,str(p)))
+		except:
+			NoRecFrac.append(np.nan)
+			RecAndIdFrac.append(np.nan)
+			RecNoIdFrac.append(np.nan)
+			continue
 		h_PV_tag = f.Get("DQMData/Run 1/Vertexing/Run summary/PrimaryVertexV/offlinePrimaryVertices/TruePVLocationIndexCumulative")
 
 		no_rec = h_PV_tag.GetBinContent(1)
@@ -133,7 +168,33 @@ Merged_Y_Mean = []
 
 for i in inter:
 	for p in params:
-		f = ROOT.TFile.Open("/eos/user/o/oyildiri/OldNewCF/%s/new2CnewF/outputfiles/run_p_%s/DQM_V0001_R000000001__Global__CMSSW_X_Y_Z__RECO.root"%(i,str(p)))
+		try:
+			f = ROOT.TFile.Open("/eos/user/o/oyildiri/OldNewCF/%s/new2CnewF/outputfiles/run_p_%s/DQM_V0001_R000000001__Global__CMSSW_X_Y_Z__RECO.root"%(i,str(p)))
+		except:
+			PV_Z_Res.append(np.nan)
+			All_Z_Res.append(np.nan)
+			Merged_Z_Res.append(np.nan)
+
+			PV_X_Res.append(np.nan)
+			All_X_Res.append(np.nan)
+			Merged_X_Res.append(np.nan)
+
+			PV_Y_Res.append(np.nan)
+			All_Y_Res.append(np.nan)
+			Merged_Y_Res.append(np.nan)
+
+			PV_Z_Mean.append(np.nan)
+			All_Z_Mean.append(np.nan)
+			Merged_Z_Mean.append(np.nan)
+
+			PV_X_Mean.append(np.nan)
+			All_X_Mean.append(np.nan)
+			Merged_X_Mean.append(np.nan)
+
+			PV_Y_Mean.append(np.nan)
+			All_Y_Mean.append(np.nan)
+			Merged_Y_Mean.append(np.nan)
+			continue
 		h_res_PV_Z = f.Get("DQMData/Run 1/Vertexing/Run summary/PrimaryVertexV/offlinePrimaryVertices/RecoPVAssoc2GenPVMatched_ResolZ")
 		h_res_PV_X = f.Get("DQMData/Run 1/Vertexing/Run summary/PrimaryVertexV/offlinePrimaryVertices/RecoPVAssoc2GenPVMatched_ResolX")
 		h_res_PV_Y = f.Get("DQMData/Run 1/Vertexing/Run summary/PrimaryVertexV/offlinePrimaryVertices/RecoPVAssoc2GenPVMatched_ResolY")
@@ -249,58 +310,77 @@ print("Merged_Y_Mean: ", Merged_Y_Mean)
 
 # Plotting
 
-plt.plot(params, e_globs)
+p_N = len(params)
+i_N = len(inter)
+
+for i in range(i_N):
+	plt.plot(params[i*p_N:(i+1)*p_N], e_globs[i*p_N:(i+1)*p_N],label="%s"%inter[i])
 plt.xlabel("mintrkweight")
 plt.ylabel(r"Efficiency $\overline{\epsilon}$")
 plt.title("Efficiency vs mintrkweight")
 plt.grid()
+plt.legend()
 plt.show()
 
-plt.plot(params, f_globs)
+for i in range(i_N):
+	plt.plot(params[i*p_N:(i+1)*p_N], f_globs[i*p_N:(i+1)*p_N],label="%s"%inter[i])
 plt.xlabel("mintrkweight")
 plt.ylabel(r"Fake rate $\overline{f}$")
 plt.title("Fake rate vs mintrkweight")
 plt.grid()
+plt.legend()
 plt.show()
 
-plt.plot(params, NoRecFrac)
+for i in range(i_N):
+	plt.plot(params[i*p_N:(i+1)*p_N], NoRecFrac[i*p_N:(i+1)*p_N],label="%s"%inter[i])
 plt.xlabel("mintrkweight")
 plt.ylabel("Fraction of events with PV not reconstructed")
 plt.title("Fraction of events with PV not reconstructed vs mintrkweight")
 plt.grid()
+plt.legend()
 plt.show()
 
-plt.plot(params, RecAndIdFrac)
+for i in range(i_N):
+	plt.plot(params[i*p_N:(i+1)*p_N], RecAndIdFrac[i*p_N:(i+1)*p_N],label="%s"%inter[i])
 plt.xlabel("mintrkweight")
 plt.ylabel("Fraction of events with PV reconstructed and identified")
 plt.title("Fraction of events with PV reconstructed and identified vs mintrkweight")
 plt.grid()
+plt.legend()
 plt.show()
 
-plt.plot(params, RecNoIdFrac)
+for i in range(i_N):
+	plt.plot(params[i*p_N:(i+1)*p_N], RecNoIdFrac[i*p_N:(i+1)*p_N],label="%s"%inter[i])
 plt.xlabel("mintrkweight")
 plt.ylabel("Fraction of events with PV reconstructed but not identified")
 plt.title("Fraction of events with PV reconstructed but not identified vs mintrkweight")
 plt.grid()
+plt.legend()
 plt.show()
 
-plt.plot(params, PV_Z_Res)
+for i in range(i_N):
+	plt.plot(params[i*p_N:(i+1)*p_N], PV_Z_Res[i*p_N:(i+1)*p_N],label="%s"%inter[i])
 plt.xlabel("mintrkweight")
 plt.ylabel(r"PV resolution z (${\mu} m$)")
 plt.title("PV resolution z vs mintrkweight")
 plt.grid()
+plt.legend()
 plt.show()
 
-plt.plot(params, All_Z_Res)
+for i in range(i_N):
+	plt.plot(params[i*p_N:(i+1)*p_N], All_Z_Res[i*p_N:(i+1)*p_N],label="%s"%inter[i])
 plt.xlabel("mintrkweight")
 plt.ylabel(r"All resolution z (${\mu} m$)")
 plt.title("All resolution z vs mintrkweight")
 plt.grid()
+plt.legend()
 plt.show()
 
-plt.plot(params, Merged_Z_Res)
+for i in range(i_N):
+	plt.plot(params[i*p_N:(i+1)*p_N], Merged_Z_Res[i*p_N:(i+1)*p_N],label="%s"%inter[i])
 plt.xlabel("mintrkweight")
 plt.ylabel(r"Merged resolution z (${\mu} m$)")
 plt.title("Merged resolution z vs mintrkweight")
 plt.grid()
+plt.legend()
 plt.show()
