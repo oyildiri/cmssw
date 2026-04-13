@@ -10,7 +10,7 @@ import re
 user = "oyildiri"
 
 # Types of jobs
-setParam = True # If setting a specific value for a parameter in the algorithm(s) or scanning over that parameter
+setParam = False # If setting a specific value for a parameter in the algorithm(s) or scanning over that parameter
 
 # Arguments (--inter <inter1> <inter2> --algo <algo1> <algo2>)
 parser = argparse.ArgumentParser()
@@ -76,8 +76,10 @@ def get_algo_script(x):
              	return None
 
 def get_inter_file(x):
-        if x == "TT" or x == "Z" or x == "VBFHInv" or x == "Upsilon" or x == "QCD":
+        if x == "TT" or x == "VBFHInv" or x == "Upsilon" or x == "QCD":
                 return "%s.txt"%x
+        elif x == "Z":
+                return "Zmumu_16X.txt" 
         else:
              	return None
 
