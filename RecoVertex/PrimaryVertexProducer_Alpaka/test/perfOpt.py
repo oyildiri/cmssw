@@ -690,8 +690,7 @@ for i in inter:
 p_N = len(params)
 i_N = len(inter)
 
-for i in range(i_N):
-	plt.plot(params[i*p_N:(i+1)*p_N], e_globs[i*p_N:(i+1)*p_N],label="%s"%inter[i])
+plt.plot(params[i*p_N:(i+1)*p_N], e_globs[i*p_N:(i+1)*p_N],label="%s"%inter[i])
 plt.xlabel("mintrkweight")
 plt.ylabel(r"Efficiency $\overline{\epsilon}$")
 plt.title("Efficiency vs mintrkweight")
@@ -700,8 +699,7 @@ plt.legend()
 plt.savefig("mintrkweightPlots/eff_mintrkweight.png")
 #plt.show()
 
-for i in range(i_N):
-	plt.plot(params[i*p_N:(i+1)*p_N], f_globs[i*p_N:(i+1)*p_N],label="%s"%inter[i])
+plt.plot(params[i*p_N:(i+1)*p_N], f_globs[i*p_N:(i+1)*p_N],label="%s"%inter[i])
 plt.xlabel("mintrkweight")
 plt.ylabel(r"Fake rate $\overline{f}$")
 plt.title("Fake rate vs mintrkweight")
@@ -710,8 +708,7 @@ plt.legend()
 plt.savefig("mintrkweightPlots/fakerate_mintrkweight.png")
 #plt.show()
 
-for i in range(i_N):
-	plt.plot(params[i*p_N:(i+1)*p_N], f_globs1[i*p_N:(i+1)*p_N],label="%s"%inter[i])
+plt.plot(params[i*p_N:(i+1)*p_N], f_globs1[i*p_N:(i+1)*p_N],label="%s"%inter[i])
 plt.xlabel("mintrkweight")
 plt.ylabel(r"Fake rate $\overline{f}$")
 plt.title("Fake rate (Low NumTrack) vs mintrkweight")
@@ -720,8 +717,7 @@ plt.legend()
 plt.savefig("mintrkweightPlots/fakerate_lowntrk_mintrkweight.png")
 #plt.show()
 
-for i in range(i_N):
-        plt.plot(params[i*p_N:(i+1)*p_N], f_globs2[i*p_N:(i+1)*p_N],label="%s"%inter[i])
+plt.plot(params[i*p_N:(i+1)*p_N], f_globs2[i*p_N:(i+1)*p_N],label="%s"%inter[i])
 plt.xlabel("mintrkweight")
 plt.ylabel(r"Fake rate $\overline{f}$")
 plt.title("Fake rate (High NumTrack) vs mintrkweight")
@@ -730,8 +726,7 @@ plt.legend()
 plt.savefig("mintrkweightPlots/fakerate_highntrk_mintrkweight.png")
 #plt.show()
 
-for i in range(i_N):
-	plt.plot(params[i*p_N:(i+1)*p_N], NoRecFrac[i*p_N:(i+1)*p_N],label="%s"%inter[i])
+plt.plot(params[i*p_N:(i+1)*p_N], NoRecFrac[i*p_N:(i+1)*p_N],label="%s"%inter[i])
 plt.xlabel("mintrkweight")
 plt.ylabel("Fraction of events with PV not reconstructed")
 plt.title("Fraction of events with PV not reconstructed vs mintrkweight")
@@ -740,8 +735,7 @@ plt.legend()
 plt.savefig("mintrkweightPlots/NoRecFrac_mintrkweight.png")
 #plt.show()
 
-for i in range(i_N):
-	plt.plot(params[i*p_N:(i+1)*p_N], RecAndIdFrac[i*p_N:(i+1)*p_N],label="%s"%inter[i])
+plt.plot(params[i*p_N:(i+1)*p_N], RecAndIdFrac[i*p_N:(i+1)*p_N],label="%s"%inter[i])
 plt.xlabel("mintrkweight")
 plt.ylabel("Fraction of events with PV reconstructed and identified")
 plt.title("Fraction of events with PV reconstructed and identified vs mintrkweight")
@@ -750,8 +744,7 @@ plt.legend()
 plt.savefig("mintrkweightPlots/RecAndIdFrac_mintrkweight.png")
 #plt.show()
 
-for i in range(i_N):
-	plt.plot(params[i*p_N:(i+1)*p_N], RecNoIdFrac[i*p_N:(i+1)*p_N],label="%s"%inter[i])
+plt.plot(params[i*p_N:(i+1)*p_N], RecNoIdFrac[i*p_N:(i+1)*p_N],label="%s"%inter[i])
 plt.xlabel("mintrkweight")
 plt.ylabel("Fraction of events with PV reconstructed but not identified")
 plt.title("Fraction of events with PV reconstructed but not identified vs mintrkweight")
@@ -760,8 +753,7 @@ plt.legend()
 plt.savefig("mintrkweightPlots/RecNoIdFrac_mintrkweight.png")
 #plt.show()
 
-for i in range(i_N):
-	plt.plot(params[i*p_N:(i+1)*p_N], PV_Z_Res[i*p_N:(i+1)*p_N],label="%s"%inter[i])
+plt.plot(params[i*p_N:(i+1)*p_N], PV_Z_Res[i*p_N:(i+1)*p_N],label="%s"%inter[i])
 plt.xlabel("mintrkweight")
 plt.ylabel(r"PV resolution z (${\mu} m$)")
 plt.title("PV resolution z vs mintrkweight")
@@ -770,8 +762,7 @@ plt.legend()
 plt.savefig("mintrkweightPlots/PV_Z_Res_mintrkweight.png")
 #plt.show()
 
-for i in range(i_N):
-	plt.plot(params[i*p_N:(i+1)*p_N], All_Z_Res[i*p_N:(i+1)*p_N],label="%s"%inter[i])
+plt.plot(params[i*p_N:(i+1)*p_N], All_Z_Res[i*p_N:(i+1)*p_N],label="%s"%inter[i])
 plt.xlabel("mintrkweight")
 plt.ylabel(r"All resolution z (${\mu} m$)")
 plt.title("All resolution z vs mintrkweight")
@@ -780,8 +771,7 @@ plt.legend()
 plt.savefig("mintrkweightPlots/All_Z_Res_mintrkweight.png")
 #plt.show()
 
-for i in range(i_N):
-	plt.plot(params[i*p_N:(i+1)*p_N], Merged_Z_Res[i*p_N:(i+1)*p_N],label="%s"%inter[i])
+plt.plot(params[i*p_N:(i+1)*p_N], Merged_Z_Res[i*p_N:(i+1)*p_N],label="%s"%inter[i])
 plt.xlabel("mintrkweight")
 plt.ylabel(r"Merged resolution z (${\mu} m$)")
 plt.title("Merged resolution z vs mintrkweight")
@@ -790,8 +780,7 @@ plt.legend()
 plt.savefig("mintrkweightPlots/Merged_Z_Res_mintrkweight.png")
 #plt.show()
 
-for i in range(i_N):
-        plt.plot(params[i*p_N:(i+1)*p_N], PV_X_Res[i*p_N:(i+1)*p_N],label="%s"%inter[i])
+plt.plot(params[i*p_N:(i+1)*p_N], PV_X_Res[i*p_N:(i+1)*p_N],label="%s"%inter[i])
 plt.xlabel("mintrkweight")
 plt.ylabel(r"PV resolution x (${\mu} m$)")
 plt.title("PV resolution x vs mintrkweight")
@@ -800,8 +789,7 @@ plt.legend()
 plt.savefig("mintrkweightPlots/PV_X_Res_mintrkweight.png")
 #plt.show()
 
-for i in range(i_N):
-        plt.plot(params[i*p_N:(i+1)*p_N], All_X_Res[i*p_N:(i+1)*p_N],label="%s"%inter[i])
+plt.plot(params[i*p_N:(i+1)*p_N], All_X_Res[i*p_N:(i+1)*p_N],label="%s"%inter[i])
 plt.xlabel("mintrkweight")
 plt.ylabel(r"All resolution x (${\mu} m$)")
 plt.title("All resolution x vs mintrkweight")
@@ -810,8 +798,7 @@ plt.legend()
 plt.savefig("mintrkweightPlots/All_X_Res_mintrkweight.png")
 #plt.show()
 
-for i in range(i_N):
-        plt.plot(params[i*p_N:(i+1)*p_N], Merged_X_Res[i*p_N:(i+1)*p_N],label="%s"%inter[i])
+plt.plot(params[i*p_N:(i+1)*p_N], Merged_X_Res[i*p_N:(i+1)*p_N],label="%s"%inter[i])
 plt.xlabel("mintrkweight")
 plt.ylabel(r"Merged resolution x (${\mu} m$)")
 plt.title("Merged resolution x vs mintrkweight")
@@ -820,8 +807,7 @@ plt.legend()
 plt.savefig("mintrkweightPlots/Merged_X_Res_mintrkweight.png")
 #plt.show()
 
-for i in range(i_N):
-        plt.plot(params[i*p_N:(i+1)*p_N], PV_Y_Res[i*p_N:(i+1)*p_N],label="%s"%inter[i])
+plt.plot(params[i*p_N:(i+1)*p_N], PV_Y_Res[i*p_N:(i+1)*p_N],label="%s"%inter[i])
 plt.xlabel("mintrkweight")
 plt.ylabel(r"PV resolution y (${\mu} m$)")
 plt.title("PV resolution y vs mintrkweight")
@@ -830,8 +816,7 @@ plt.legend()
 plt.savefig("mintrkweightPlots/PV_Y_Res_mintrkweight.png")
 #plt.show()
 
-for i in range(i_N):
-        plt.plot(params[i*p_N:(i+1)*p_N], All_Y_Res[i*p_N:(i+1)*p_N],label="%s"%inter[i])
+plt.plot(params[i*p_N:(i+1)*p_N], All_Y_Res[i*p_N:(i+1)*p_N],label="%s"%inter[i])
 plt.xlabel("mintrkweight")
 plt.ylabel(r"All resolution y (${\mu} m$)")
 plt.title("All resolution y vs mintrkweight")
@@ -840,8 +825,7 @@ plt.legend()
 plt.savefig("mintrkweightPlots/All_Y_Res_mintrkweight.png")
 #plt.show()
 
-for i in range(i_N):
-        plt.plot(params[i*p_N:(i+1)*p_N], Merged_Y_Res[i*p_N:(i+1)*p_N],label="%s"%inter[i])
+plt.plot(params[i*p_N:(i+1)*p_N], Merged_Y_Res[i*p_N:(i+1)*p_N],label="%s"%inter[i])
 plt.xlabel("mintrkweight")
 plt.ylabel(r"Merged resolution y (${\mu} m$)")
 plt.title("Merged resolution y vs mintrkweight")

@@ -12,7 +12,7 @@
 
 using namespace std;
 
-#define DEBUG
+//#define DEBUG
 #ifdef DEBUG
 #define DEBUGLEVEL 5
 #endif
@@ -46,7 +46,6 @@ DAClusterizerInZ_vect::DAClusterizerInZ_vect(const edm::ParameterSet& conf) {
   runInBlocks_ = conf.getParameter<bool>("runInBlocks");
   block_size_ = conf.getParameter<unsigned int>("block_size");
   overlap_frac_ = conf.getParameter<double>("overlap_frac");
-  mintrkweight_ = mintrkweight_/(1-overlap_frac_);
 
 #ifdef DEBUG
   std::cout << "DAClusterizerinZ_vect: mintrkweight = " << mintrkweight_ << std::endl;
