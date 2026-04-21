@@ -1,5 +1,5 @@
 import subprocess
-import os 
+import os
 import sys
 import argparse
 import time
@@ -87,7 +87,7 @@ def get_inter_file(x):
         if x == "TT" or x == "VBFHInv" or x == "Upsilon" or x == "QCD":
                 return "%s.txt"%x
         elif x == "Z":
-                return "Zmumu_16X.txt" 
+                return "Zmumu_16X.txt"
         else:
              	return None
 
@@ -121,7 +121,7 @@ def count_lines(file):
 
 def count_files(dir, name):
 	direc = Path(dir)
-	file_count = sum(1 for f in direc.glob(name) if f.is_file()) 
+	file_count = sum(1 for f in direc.glob(name) if f.is_file())
 	return file_count
 
 def find_max_file(dir,word,type):
@@ -133,7 +133,7 @@ def find_max_file(dir,word,type):
 			x2 = int(x1.removesuffix(type))
 			runs.append(x2)
 	if len(runs) == 0:
-		x = 0 
+		x = 0
 	else :
 		x = max(runs)
 	return x
@@ -148,35 +148,34 @@ mainpath = "/eos/user/o/oyildiri/OldNewCF" # Where the outputs go
 workarea = "/afs/cern.ch/user/o/oyildiri/private/CMS/CMSSW_15_0_4/src/RecoVertex/PrimaryVertexProducer_Alpaka/test" # Wbere the interaction files and algorithm scripts are
 
 # Check validity of algorithm and interaction names as arguments
-algo_script = []
-for i in args.algo:
-        if get_algo_script(i) == None:
-                print("Error: %s is not a valid algorithm name."%i)
-                sys.exit(1)
-        else :
-              	print("%s algorithm name valid"%i)
+for i in algo:
+	if get_algo_script(i) == None:
+		print("Error: %s is not a valid algorithm name."%i)
+		sys.exit(1)
+	else :
+		print("%s algorithm name valid"%i)
 
-for i in args.inter:
-        if get_inter_file(i) == None:
-                print("Error: %s is not a valid interaction name."%i)
-                sys.exit(1)
-        else :
-              	print("%s interaction name valid"%i)
+for i in inter:
+	if get_inter_file(i) == None:
+		print("Error: %s is not a valid interaction name."%i)
+		sys.exit(1)
+	else :
+		print("%s interaction name valid"%i)
 
 # Read arguments
 inter = []
 for i in args.inter:
 	inter.append(i)
-
 algo = []
 for i in args.algo:
 	algo.append(i)
+algo_script = []
 
 rungroup = []
 for i in args.group:
 	rungroup.append(i)
 
-if args.param_min != None or args.param_max != None or args.param_num != None or args.params != None:
+if args.param_min =! None or args.param_max =! None or args.param_num =! None or args.params =! None:
 	setParam = True
 else:
 	setParam = False
@@ -236,20 +235,23 @@ else:
 						run = [i, a, g, run_type, p, run_tag]
 						run.append("%s/%s/RUNS_%s/run_%"%(run[0],run[1],run[2],run[5]))
 						run_list.append(run)
-# Make directories and run
-JOBS = []
-for r in runlist:
-	runPath = "%s/%s"%(mainpath,r[6])
-	Path(runPath).mkdir(parents=True, exist_ok=True)
-	if r[3] == "P":
-		subprocess.run(["python3","jobSubmit.py","%s_%s_p_%s"%(r[1],r[0],str(r[4])), "%s"%workarea, "%s/%s"%(workarea,get_algo_script(r[1])), "%s/%s"%(workarea, get_inter_file(r[0])), runPath,str(r[4])])
-	elif r[3] == "I":
-		subprocess.run(["python3","jobSubmit.py","%s_%s"%(r[1],r[0]), "%s"%workarea, "%s/%s"%(workarea,get_algo_script(r[1])), "%s/%s"%(workarea, get_inter_file(r[0])), runPath])
-	result = subprocess.run(["condor_q",user], capture_output=True, text=True)
-	print(get_batchnumber(result))
-	batch_nums.append(get_batchnumber(result))
-	job = [r,get_batchnumber(result)]
-	JOBS.append(job)
-for j in JOBS:
-	print("%s %s %s %s %s %s JOB ID: %s"%(str(j[0][0]), str(j[0][1]), str(j[0][2]), str(j[0][3]), str(j[0][4]), str(j[0][5]), str(j[1][0]) ))
 
+# Make harvest lists
+for r in run_list:
+	runPath = "%s/%s"%(mainpath,r[6])
+	subprocess.run(["python3","%s/makeHarvestList_new.py"%workarea, "%s"%runPath, "%s"%runPath])
+# Harvest
+cmssw_path = "/afs/cern.ch/user/o/oyildiri/private/CMS/CMSSW_15_0_4/src"
+for r in run_list:
+	runPath = "%s/%s/%s/RUNS_%s/run_%"%(mainpath,r[0],r[1],r[2],r[5])
+	hlist = "HarvestList.txt"
+	cmd = f"""
+	cd {cmssw_path}
+	eval "$(scramv1 runtime -sh)"
+	cd {runPath}
+	cmsRun {workarea}/harvester.py inputFileList={hlist}
+	"""
+	try:
+		subprocess.run(cmd, shell=True, executable="/bin/bash", check=True)
+	except:
+		pass

@@ -1,16 +1,17 @@
 import ROOT
 import matplotlib.pyplot as plt
 import numpy as np
+import argparse
 ROOT.gROOT.SetBatch(False)
 
 print(ROOT.kBlack, type(ROOT.kBlack))
 
-
-param_min = 0.01
-param_max = 0.5
-param_num = 10
-dp = (param_max - param_min)/(param_num - 1)
-params_given = [0.5555555555555556, 0.6111111111111112, 0.6666666666666666, 0.7222222222222222, 0.7777777777777778, 0.8333333333333333, 0.8888888888888888, 0.9444444444444444, 1.0]
+parser = argparse.ArgumentParser()
+parser.add_argument(
+	"--run_path_list",
+	type=str,
+)
+args = parser.parse_args()
 
 param_manual = False
 runs_from_list = True
@@ -80,6 +81,23 @@ P_PLOTS_BLOCK = [
     "res"
 ]
 
+# Runs
+run_list = []
+try:
+	with open(args.run_path_list) as list:
+		for line in list:
+			s = line.split("/")
+			rungroupPath = "%s/%s/%s/RUNS_%s"%(mainpath,s[0],s[1],s[2])
+			if s[3] == "I":
+				run_tag = str(find_max_run(rungroupPath,"run_")+1)
+				run = [s[0], s[1], s[2], s[3], None, run_tag]
+			elif s[3] == "P":
+				run_tag = "p_%s"%str(s[4])
+				run = [s[0], s[1], s[2], s[3], float(s[4]), run_tag]
+			run.append("%s/%s/RUNS_%s/run_%"%(run[0],run[1],run[2],run[5]))
+			run_list.append(run)
+except:
+	sys.exit(1)
 
 #Parameters
 
@@ -129,6 +147,8 @@ print("----------------------------------------------")
 
 
 #Efficiency
+e_globs = []
+
 e_globs = []
 for i in inter:
 	for p in params:
