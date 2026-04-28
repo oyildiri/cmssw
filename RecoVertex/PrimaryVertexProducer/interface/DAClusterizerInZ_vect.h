@@ -191,7 +191,7 @@ public:
 
   double update(
       double beta, track_t &gtracks, vertex_t &gvertices, const double rho0 = 0, const bool updateTc = false) const;
-
+  void dumpV(const double _beta, const vertex_t &y) const;
   void dump(
       const double beta, const vertex_t &y, const track_t &tks, const int verbosity = 0, const double rho0 = 0.) const;
   bool merge(vertex_t &y, track_t &tks, double &beta) const;

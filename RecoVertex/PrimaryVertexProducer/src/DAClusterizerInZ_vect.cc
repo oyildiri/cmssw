@@ -14,14 +14,14 @@ using namespace std;
 
 //#define DEBUG
 #ifdef DEBUG
-#define DEBUGLEVEL 0
+#define DEBUGLEVEL 5
 #endif
 
 DAClusterizerInZ_vect::DAClusterizerInZ_vect(const edm::ParameterSet& conf) {
   // hardcoded parameters
   maxIterations_ = 1000;
-  mintrkweight_ = 0.5;
-
+  mintrkweight_ = conf.getParameter<double>("mintrkweight");
+  //printf("Min track weight is %1.3f\n", mintrkweight_);
   // configurable debug output
 #ifdef DEBUG
   zdumpcenter_ = conf.getUntrackedParameter<double>("zdumpcenter", 0.);
@@ -614,7 +614,6 @@ double DAClusterizerInZ_vect::beta0(double betamax, track_t const& tks, vertex_t
       sumwz += w * tks.zpca[i];
       sumw += w;
     }
-
     y.zvtx[k] = sumwz / sumw;
 
     // estimate Tcrit
@@ -625,8 +624,8 @@ double DAClusterizerInZ_vect::beta0(double betamax, track_t const& tks, vertex_t
       a += w * std::pow(dx, 2) * tks.dz2[i];
       b += w;
     }
-    double Tc = 2. * a / b;  // the critical temperature of this vertex
 
+    double Tc = 2. * a / b;  // the critical temperature of this vertex
     if (Tc > T0)
       T0 = Tc;
 
@@ -937,7 +936,6 @@ vector<TransientVertex> DAClusterizerInZ_vect::vertices_no_blocks(const vector<r
 vector<TransientVertex> DAClusterizerInZ_vect::vertices_in_blocks(const vector<reco::TransientTrack>& tracks) const {
   vector<reco::TransientTrack> sorted_tracks;
   vector<pair<float, float>> vertices_tot;  // z, rho for each vertex
-  sorted_tracks.reserve(tracks.size());
   for (unsigned int i = 0; i < tracks.size(); i++) {
     sorted_tracks.push_back(tracks[i]);
   }
@@ -962,6 +960,8 @@ vector<TransientVertex> DAClusterizerInZ_vect::vertices_in_blocks(const vector<r
     unsigned int end = (unsigned int)std::min(begin + block_size_, (unsigned int)sorted_tracks.size());
     for (unsigned int i = begin; i < end; i++) {
       block_tracks.push_back(sorted_tracks[i]);
+      //printf("Add track %i, z:%1.5f\n", i, sorted_tracks[i].stateAtBeamLine().trackStateAtPCA().position().z());
+      if (i == (end-1)){printf("Last track in block in z: %1.5f\n", sorted_tracks[i].stateAtBeamLine().trackStateAtPCA().position().z());}
     }
     if (block_tracks.empty()) {
       continue;
@@ -1181,7 +1181,7 @@ vector<TransientVertex> DAClusterizerInZ_vect::vertices_in_blocks(const vector<r
 
   rho0 = nv > 1 ? 1. / nv : 1.;
   const auto z_sum_init = rho0 * local_exp(-beta * dzCutOff_ * dzCutOff_);
-
+  //printf("Next event\n");
   std::vector<std::vector<unsigned int>> vtx_track_indices(nv);
   for (unsigned int i = 0; i < nt; i++) {
     const auto kmin = tracks_tot.kmin[i];
@@ -1197,6 +1197,7 @@ vector<TransientVertex> DAClusterizerInZ_vect::vertices_in_blocks(const vector<r
     for (auto k = kmin; k < kmax && invZ != 0.0; k++) {
       float v_exp = local_exp(-beta * Eik(tracks_tot.zpca[i], vertices_tot[k].first, tracks_tot.dz2[i]));
       double p = vertices_tot[k].second * v_exp * invZ;
+      //printf("Track %i, z=%1.5f, vertex %i, p=%1.3f\n", i, tracks_tot.zpca[i], k, p);
       if (p > p_max && p > mintrkweight_) {
         p_max = p;
         iMax = k;
@@ -1220,7 +1221,7 @@ vector<TransientVertex> DAClusterizerInZ_vect::vertices_in_blocks(const vector<r
 
   GlobalError dummyError(0.01, 0, 0.01, 0., 0., 0.01);
   vector<reco::TransientTrack> vertexTracks;
-
+  //bool previousGood = false;
   for (unsigned int k = 0; k < nv; k++) {
     if (!vtx_track_indices[k].empty()) {
       for (auto i : vtx_track_indices[k]) {
@@ -1233,13 +1234,15 @@ vector<TransientVertex> DAClusterizerInZ_vect::vertices_in_blocks(const vector<r
     }
 
     // implement what clusterize() did before : merge left-to-right if distance < 2 * vertexSize_
-    if ((k + 1 == nv) || (abs(vertices_tot[k + 1].first - vertices_tot[k].first) > (2 * vertexSize_))) {
+    if ((k + 1 == nv) || (abs(vertices_tot[k + 1].first - vertices_tot[k].first) > (2 * vertexSize_))){ // || not(previousGood) ) { // If the previous was not good we don't compare with it
       // close a cluster
       if (vertexTracks.size() > 1) {
         GlobalPoint pos(0, 0, vertices_tot[k].first);  // only usable with subsequent fit
         TransientVertex v(pos, dummyError, vertexTracks, 0);
         clusters.push_back(v);
+	//previousGood = true;
       }
+      //else { previousGood = false; }
       vertexTracks.clear();
     }
   }
@@ -1283,13 +1286,14 @@ vector<TransientVertex> DAClusterizerInZ_vect::fill_vertices(double beta, double
     unsigned int k_pmax = 0;
     for (auto k = kmin; k < kmax; k++) {
       double p = y.rho[k] * y.exp[k] * invZ;
+      //printf("Track %i, z=%1.5f, vertex %i, p=%1.3f\n", i, tks.zpca[i], k, p);
       if (p > pmax) {
         pmax = p;
         k_pmax = k;
       }
     }
 
-    if (pmax > mintrkweight_) {
+    if (pmax > 0.5) {
       // assign to the cluster with the highest assignment weight, if it is at least mintrkweight_
       vtx_track_indices[k_pmax].push_back(i);
       vtx_track_weights[k_pmax].push_back(pmax);
@@ -1544,6 +1548,7 @@ void DAClusterizerInZ_vect::dump(
 void DAClusterizerInZ_vect::fillPSetDescription(edm::ParameterSetDescription& desc) {
   desc.addUntracked<double>("zdumpcenter", 0.);
   desc.addUntracked<double>("zdumpwidth", 20.);
+  desc.add<double>("mintrkweight",0.5);
   desc.add<double>("d0CutOff", 3.0);
   desc.add<double>("Tmin", 2.0);
   desc.add<double>("delta_lowT", 0.001);
