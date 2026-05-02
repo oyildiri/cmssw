@@ -14,7 +14,7 @@ print()
 interval = 1           # number files to be processed in a single job, take care to split your file so that you run on all files. The last job might be with smaller number of files (the ones that remain).
 queue = "workday"      # Queue to use See https://batchdocs.web.cern.ch/local/submit.html#job-flavours 
 proxy_path = "/afs/cern.ch/user/o/oyildiri/private/x509up_u188570" # This is where your proxy will be held for access by batch system
-doSubmit = True        # Uncomment for testing dry run
+doSubmit = False        # Uncomment for testing dry run
 NumberOfJobs = -1
 
 #logdir = "/eos/user/o/oyildiri/logfiles"
