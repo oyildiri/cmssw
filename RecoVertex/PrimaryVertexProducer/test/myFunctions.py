@@ -22,10 +22,11 @@ def get_algo_script(x):
              	return None
 
 def get_inter_file(x):
-        if x == "TT" or x == "VBFHInv" or x == "Upsilon" or x == "QCD":
+	interactions = [Hinv, QCD, TTto2l2nu, TT, Upsilon, Wprimetolnu, Wtolnu, Wtomunu, Zprimetoee, Zprimetomm, Ztoee, Ztomm, Ztott]
+	if x in interactions:
                 return "%s.txt"%x
-        elif x == "Z":
-                return "Zmumu_16X.txt" 
+#        elif x == "Z":
+ #               return "Zmumu_16X.txt" 
         else:
              	return None
 
