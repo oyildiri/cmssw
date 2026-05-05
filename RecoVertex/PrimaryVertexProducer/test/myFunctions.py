@@ -22,13 +22,13 @@ def get_algo_script(x):
              	return None
 
 def get_inter_file(x):
-	interactions = [Hinv, QCD, TTto2l2nu, TT, Upsilon, Wprimetolnu, Wtolnu, Wtomunu, Zprimetoee, Zprimetomm, Ztoee, Ztomm, Ztott]
+	interactions = ["Hinv", "QCD", "TTto2l2nu", "TT", "Upsilon", "Wprimetolnu", "Wtolnu", "Wtomunu", "Zprimetoee", "Zprimetomm", "Ztoee", "Ztomm", "Ztott"]
 	if x in interactions:
-                return "%s.txt"%x
+		return "%s.txt"%x
 #        elif x == "Z":
  #               return "Zmumu_16X.txt" 
-        else:
-             	return None
+	else:
+		return None
 
 def count_ls(dir,word):
 	x = subprocess.run(["find","%s"%dir,"-maxdepth","1","-type","d","-name","%s"%word,"|","wc", "-l"],capture_output=True, text=True)

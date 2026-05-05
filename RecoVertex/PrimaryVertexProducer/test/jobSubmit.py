@@ -19,7 +19,7 @@ NumberOfJobs = -1
 
 #logdir = "/eos/user/o/oyildiri/logfiles"
 
-setParam = True
+setParam = False
 
 tag       = str(sys.argv[1]) # To identify the temporary run folder
 workarea  = str(sys.argv[2]) # The place where your test scripts are, so we can cd there

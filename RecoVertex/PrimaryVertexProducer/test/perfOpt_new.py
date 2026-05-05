@@ -15,6 +15,16 @@ parser.add_argument(
 	"--run_path_list",
 	type=str,
 )
+
+parser.add_argument(
+	"--only_vs_param",
+	action="store_true"
+)
+
+parser.add_argument(
+	"--only_hist",
+	action="store_true"
+)
 args = parser.parse_args()
 
 param_manual = False
@@ -514,7 +524,11 @@ for Y in YPLOT_SORTED:
 	print(Y[0])
 	print(Y[1])
 
-for YS in YPLOT_SORTED:
+
+pltcolors = plt.rcParams['axes.prop_cycle'].by_key()['color']
+
+for i, YS in enumerate(YPLOT_SORTED):
+	ptcolor = pltcolors[i % len(pltcolors)]
 	for P in YS[1]:
 		if P[0][0] == "P":
 			xvalues = []
@@ -522,11 +536,11 @@ for YS in YPLOT_SORTED:
 			for P1 in P[1]:
 				xvalues.append(P1[0][4])
 				yvalues.append(P1[1])
-			plt.plot(xvalues,yvalues,label = f"{P[0][0]}/{P[0][1]}/{P[0][2]}/{P[0][3]}")
+			plt.plot(xvalues,yvalues,color=ptcolor,label = f"{P[0][0]}/{P[0][1]}/{P[0][2]}/{P[0][3]}")
 		elif P[0][0] == "I":
 			for P1 in P[1]:
 				yvalue = P1[1]
-				plt.axhline(y=yvalue,label = f"{P[0][0]}/{P[0][1]}/{P[0][2]}/{P[0][3]}")
+				plt.axhline(y=yvalue,color=ptcolor, label = f"{P[0][0]}/{P[0][1]}/{P[0][2]}/{P[0][3]}")
 
 
 	# Titles, axis labels, plotting
@@ -660,163 +674,153 @@ for YS in YPLOT_SORTED:
 	plt.savefig("OptPlots/%s"%plotname)
 	plt.close()
 
-
-RUN_HIST_H = []
-for r in run_list:
-	print(r)
-for H in HIST_H:
-	h_results = []
+if not args.only_vs_params == True:
+	RUN_HIST_H = []
 	for r in run_list:
-		f = ROOT.TFile.Open("/eos/user/o/oyildiri/OldNewCF/%s/DQM_V0001_R000000001__Global__CMSSW_X_Y_Z__RECO.root"%str(r[6]))
-		h = f.Get("DQMData/Run 1/Vertexing/Run summary/PrimaryVertexV/offlinePrimaryVertices/%s"%H)
-		h.SetDirectory(0)
-		if r[3] == "P":
-			label = f"{r[0]}/{r[1]}/{r[2]}/{r[4]:.3f}"
-		elif r[3] == "I":
-			label = f"{r[0]}/{r[1]}/{r[2]}"
-		result = [r,h,label]
-		h_results.append(result)
-	RUN_HIST_H.append([H, h_results])
+		print(r)
+	for H in HIST_H:
+		h_results = []
+		for r in run_list:
+			f = ROOT.TFile.Open("/eos/user/o/oyildiri/OldNewCF/%s/DQM_V0001_R000000001__Global__CMSSW_X_Y_Z__RECO.root"%str(r[6]))
+			h = f.Get("DQMData/Run 1/Vertexing/Run summary/PrimaryVertexV/offlinePrimaryVertices/%s"%H)
+			h.SetDirectory(0)
+			if r[3] == "P":
+				label = f"{r[0]}/{r[1]}/{r[2]}/{r[4]:.3f}"
+			elif r[3] == "I":
+				label = f"{r[0]}/{r[1]}/{r[2]}"
+			result = [r,h,label]
+			h_results.append(result)
+		RUN_HIST_H.append([H, h_results])
 
 
-colors = [
-    ROOT.kBlack,
-    ROOT.kRed,
-    ROOT.kBlue,
-    ROOT.kGreen+2,
-    ROOT.kMagenta,
-    ROOT.kOrange+7,
-    ROOT.kCyan+2,
-    ROOT.kViolet,
-    ROOT.kAzure+1,
-    ROOT.kPink+7,
-    ROOT.kTeal+3,
-    ROOT.kSpring+5,
-    ROOT.kYellow+2,
-    ROOT.kOrange+1,
-    ROOT.kRed+2,
-    ROOT.kBlue+2,
-    ROOT.kGreen+3,
-    ROOT.kMagenta+2,
-    ROOT.kCyan+3,
-    ROOT.kGray+2
-]
+	colors = [
+		ROOT.kBlack,
+		ROOT.kRed,
+		ROOT.kBlue,
+		ROOT.kGreen+2,
+		ROOT.kMagenta,
+		ROOT.kOrange+7,
+		ROOT.kCyan+2,
+		ROOT.kViolet,
+		ROOT.kAzure+1,
+		ROOT.kPink+7,
+		ROOT.kTeal+3,
+		ROOT.kSpring+5,
+		ROOT.kYellow+2,
+		ROOT.kOrange+1,
+		ROOT.kRed+2,
+		ROOT.kBlue+2,
+		ROOT.kGreen+3,
+		ROOT.kMagenta+2,
+		ROOT.kCyan+3,
+		ROOT.kGray+2
+	]
 
-def RootTH1FPlot(hist_name, hist_list,x1,y1,x2,y2):
-	c1 = ROOT.TCanvas(f"c_{hist_name}",f"c_{hist_name}",800,800)
-	pad1 = ROOT.TPad("pad1", "top pad", 0, 0.30, 1, 1.0)
-	pad2 = ROOT.TPad("pad2", "bottom pad", 0, 0.00, 1, 0.30)
-	pad1.SetBottomMargin(0.02)
-	pad2.SetTopMargin(0.02)
-	pad2.SetBottomMargin(0.30)
-	pad1.Draw()
-	pad2.Draw()
-	pad1.SetGrid()
-	pad2.SetGrid()
+	def RootTH1FPlot(hist_name, hist_list,x1,y1,x2,y2,xtitle,ytitle):
+		c1 = ROOT.TCanvas(f"c_{hist_name}",f"c_{hist_name}",800,800)
+		pad1 = ROOT.TPad("pad1", "top pad", 0, 0.30, 1, 1.0)
+		pad2 = ROOT.TPad("pad2", "bottom pad", 0, 0.00, 1, 0.30)
+		pad1.SetBottomMargin(0.02)
+		pad2.SetTopMargin(0.02)
+		pad2.SetBottomMargin(0.30)
+		pad1.Draw()
+		pad2.Draw()
+		pad1.SetGrid()
+		pad2.SetGrid()
 
-	pad1.cd()
+		pad1.cd()
 
-	for i, h in enumerate(hist_list[1]):
-		color = int(colors[i % len(colors)])
-		h[1].SetLineColor(color)
-		h[1].SetLineWidth(2)
-		h[1].SetStats(0)
-	ymax = max(h[1].GetMaximum() for h in hist_list[1])
-	hist_list[1][0][1].SetMaximum(1.2*ymax)
-	hist_list[1][0][1].Draw("HIST")
-	for h in hist_list[1]:
-		if h[1] == hist_list[1][0][1]:
-			continue
-		h[1].Draw("HIST SAME")
-	hist_list[1][0][1].GetXaxis().SetLabelSize(0)
-	hist_list[1][0][1].GetXaxis().SetTitleSize(0)
-	hist_list[1][0][1].GetYaxis().SetTitle("N")
-	leg = ROOT.TLegend(x1, y1, x2, y2)
-	leg.SetTextSize(0.04)
-	leg.SetMargin(0.2)
-	leg.SetEntrySeparation(0.9)
-	for i, h in enumerate(hist_list[1]):
-		leg.AddEntry(h[1], h[2], "l")
-	leg.Draw()
+		for i, h in enumerate(hist_list[1]):
+			color = int(colors[i % len(colors)])
+			h[1].SetLineColor(color)
+			h[1].SetLineWidth(2)
+			h[1].SetStats(0)
+		ymax = max(h[1].GetMaximum() for h in hist_list[1])
+		hist_list[1][0][1].SetMaximum(1.2*ymax)
+		hist_list[1][0][1].Draw("HIST")
+		for h in hist_list[1]:
+			if h[1] == hist_list[1][0][1]:
+				continue
+			h[1].Draw("HIST SAME")
+		hist_list[1][0][1].GetXaxis().SetLabelSize(0)
+		hist_list[1][0][1].GetXaxis().SetTitleSize(0)
+		hist_list[1][0][1].GetYaxis().SetTitle(ytitle)
+		leg = ROOT.TLegend(x1, y1, x2, y2)
+		leg.SetTextSize(0.04)
+		leg.SetMargin(0.2)
+		leg.SetEntrySeparation(0.9)
+		for i, h in enumerate(hist_list[1]):
+			leg.AddEntry(h[1], h[2], "l")
+		leg.Draw()
 
-	### ratio
+		### ratio
 
-	pad2.cd()
+		pad2.cd()
 
-	Ratios = []
-	for i, h in enumerate(hist_list[1]):
-		if h[1] == hist_list[1][0][1]:
-			continue
-		r = h[1].Clone(f"r{i+1}")
-		Ratios.append(r)
-	for i, r in enumerate(Ratios):
-		color = int(colors[(i+1) % len(colors)])
-		r.Divide(hist_list[1][0][1])
-		r.SetLineColor(color)
-		r.SetLineWidth(2)
-		r.SetStats(0)
-	Ratios[0].SetTitle("")
-	Ratios[0].GetYaxis().SetTitle("Ratio")
-	Ratios[0].GetYaxis().SetNdivisions(505)
-	Ratios[0].GetYaxis().SetTitleSize(0.08)
-	Ratios[0].GetYaxis().SetTitleOffset(0.5)
-	Ratios[0].GetYaxis().SetLabelSize(0.08)
+		Ratios = []
+		for i, h in enumerate(hist_list[1]):
+			if h[1] == hist_list[1][0][1]:
+				continue
+			r = h[1].Clone(f"r{i+1}")
+			Ratios.append(r)
+		for i, r in enumerate(Ratios):
+			color = int(colors[(i+1) % len(colors)])
+			r.Divide(hist_list[1][0][1])
+			r.SetLineColor(color)
+			r.SetLineWidth(2)
+			r.SetStats(0)
+		Ratios[0].SetTitle("")
+		Ratios[0].GetYaxis().SetTitle("Ratio")
+		Ratios[0].GetYaxis().SetNdivisions(505)
+		Ratios[0].GetYaxis().SetTitleSize(0.08)
+		Ratios[0].GetYaxis().SetTitleOffset(0.5)
+		Ratios[0].GetYaxis().SetLabelSize(0.08)
 
-	Ratios[0].GetXaxis().SetTitle("Number of tracks in vertex fit")
-	Ratios[0].GetXaxis().SetTitleSize(0.10)
-	Ratios[0].GetXaxis().SetTitleOffset(1.1)
-	Ratios[0].GetXaxis().SetLabelSize(0.08)
-	Ratios[0].SetMinimum(0.5)
-	Ratios[0].SetMaximum(1.5)
-	Ratios[0].Draw("HIST")
-	for r in Ratios:
-		if r == Ratios[0]:
-			continue
-		r.Draw("HIST SAME")
-	line = ROOT.TLine(
-		hist_list[1][0][1].GetXaxis().GetXmin(), 1.0,
-		hist_list[1][0][1].GetXaxis().GetXmax(), 1.0
-	)
-	line.SetLineStyle(2)
-	line.Draw()
-	c1.SaveAs(f"OptPlots/{hist_name}.png")
-	#c1.Draw()
-	#c1.Update()
-	#input("Press Enter to close...")
-#RUN_HIST_H_COPY = RUN_HIST_H
-#for i, RH in enumerate(RUN_HIST_H):
-#	if RH[1][0][3]=="I":
-#		indrun = RUN_HIST_H_COPY.pop(i)
-#		RUN_HIST_H_COPY.insert(0,indrun)
-#		break
-#RUN_HIST_H = RUN_HIST_H_COPY
+		Ratios[0].GetXaxis().SetTitle(xtitle)
+		Ratios[0].GetXaxis().SetTitleSize(0.10)
+		Ratios[0].GetXaxis().SetTitleOffset(1.1)
+		Ratios[0].GetXaxis().SetLabelSize(0.08)
+		Ratios[0].SetMinimum(0.5)
+		Ratios[0].SetMaximum(1.5)
+		Ratios[0].Draw("HIST")
+		for r in Ratios:
+			if r == Ratios[0]:
+				continue
+			r.Draw("HIST SAME")
+		line = ROOT.TLine(
+			hist_list[1][0][1].GetXaxis().GetXmin(), 1.0,
+			hist_list[1][0][1].GetXaxis().GetXmax(), 1.0
+		)
+		line.SetLineStyle(2)
+		line.Draw()
+		c1.SaveAs(f"OptPlots/{hist_name}.png")
 
-for RH in RUN_HIST_H:
-	if RH[0] == "RecoAllAssoc2Gen_NumTracks":
-		RootTH1FPlot(RH[0], RH, 0.5, 0.5, 0.92, 0.92)
-	elif RH[0] == "RecoAllAssoc2Gen_X":
-		RootTH1FPlot(RH[0], RH, 0.6, 0.4, 0.92, 0.92)
-	elif RH[0] == "RecoAllAssoc2Gen_Y":
-		RootTH1FPlot(RH[0], RH, 0.6, 0.4, 0.92, 0.92)
-	elif RH[0] == "effic_vs_NumTracks":
-		RootTH1FPlot(RH[0], RH, 0.46, 0.29, 0.83, 0.69)
-	elif RH[0] == "fakerate_vs_NumTracks":
-		RootTH1FPlot(RH[0], RH, 0.5, 0.5, 0.92, 0.92)
-	elif RH[0] == "RecoPVAssoc2GenPVMatched_ResolZ":
-		RootTH1FPlot(RH[0], RH, 0.7, 0.5, 0.92, 0.92)
-	elif RH[0] == "RecoPVAssoc2GenPVMatched_ResolX":
-		RootTH1FPlot(RH[0], RH, 0.7, 0.5, 0.92, 0.92)
-	elif RH[0] == "RecoPVAssoc2GenPVMatched_ResolY":
-		RootTH1FPlot(RH[0], RH, 0.7, 0.5, 0.92, 0.92)
-	elif RH[0] == "RecoAllAssoc2GenMatched_ResolZ":
-		RootTH1FPlot(RH[0], RH, 0.7, 0.5, 0.92, 0.92)
-	elif RH[0] == "RecoAllAssoc2GenMatched_ResolX":
-		RootTH1FPlot(RH[0], RH, 0.7, 0.5, 0.92, 0.92)
-	elif RH[0] == "RecoAllAssoc2GenMatched_ResolY":
-		RootTH1FPlot(RH[0], RH, 0.7, 0.5, 0.92, 0.92)
-	elif RH[0] == "RecoAllAssoc2GenMatchedMerged_ResolZ":
-		RootTH1FPlot(RH[0], RH, 0.7, 0.5, 0.92, 0.92)
-	elif RH[0] == "RecoAllAssoc2GenMatchedMerged_ResolX":
-		RootTH1FPlot(RH[0], RH, 0.7, 0.5, 0.92, 0.92)
-	elif RH[0] == "RecoAllAssoc2GenMatchedMerged_ResolY":
-		RootTH1FPlot(RH[0], RH, 0.7, 0.5, 0.92, 0.92)
+	for RH in RUN_HIST_H:
+		if RH[0] == "RecoAllAssoc2Gen_NumTracks":
+			RootTH1FPlot(RH[0], RH, 0.5, 0.5, 0.92, 0.92, "Number of tracks in vertex fit", "N")
+		elif RH[0] == "RecoAllAssoc2Gen_X":
+			RootTH1FPlot(RH[0], RH, 0.6, 0.4, 0.92, 0.92, "Reco vertex pos x (cm)", "N")
+		elif RH[0] == "RecoAllAssoc2Gen_Y":
+			RootTH1FPlot(RH[0], RH, 0.6, 0.4, 0.92, 0.92, "Reco vertex pos y (cm)", "N")
+		elif RH[0] == "effic_vs_NumTracks":
+			RootTH1FPlot(RH[0], RH, 0.46, 0.29, 0.83, 0.69,"Number of tracks in vertex fit","Efficiency")
+		elif RH[0] == "fakerate_vs_NumTracks":
+			RootTH1FPlot(RH[0], RH, 0.5, 0.5, 0.92, 0.92, "Number of tracks in vertex fit", "Fake rate")
+		elif RH[0] == "RecoPVAssoc2GenPVMatched_ResolZ":
+			RootTH1FPlot(RH[0], RH, 0.7, 0.5, 0.92, 0.92, "Resolution in Z (#mu m)", "N")
+		elif RH[0] == "RecoPVAssoc2GenPVMatched_ResolX":
+			RootTH1FPlot(RH[0], RH, 0.7, 0.5, 0.92, 0.92, "Resolution in X (#mu m)", "N")
+		elif RH[0] == "RecoPVAssoc2GenPVMatched_ResolY":
+			RootTH1FPlot(RH[0], RH, 0.7, 0.5, 0.92, 0.92, "Resolution in Y (#mu m)", "N")
+		elif RH[0] == "RecoAllAssoc2GenMatched_ResolZ":
+			RootTH1FPlot(RH[0], RH, 0.7, 0.5, 0.92, 0.92, "Resolution in Z (#mu m)", "N")
+		elif RH[0] == "RecoAllAssoc2GenMatched_ResolX":
+			RootTH1FPlot(RH[0], RH, 0.7, 0.5, 0.92, 0.92, "Resolution in X (#mu m)", "N")
+		elif RH[0] == "RecoAllAssoc2GenMatched_ResolY":
+			RootTH1FPlot(RH[0], RH, 0.7, 0.5, 0.92, 0.92, "Resolution in Y (#mu m)", "N")
+		elif RH[0] == "RecoAllAssoc2GenMatchedMerged_ResolZ":
+			RootTH1FPlot(RH[0], RH, 0.7, 0.5, 0.92, 0.92, "Resolution in Z (#mu m)", "N")
+		elif RH[0] == "RecoAllAssoc2GenMatchedMerged_ResolX":
+			RootTH1FPlot(RH[0], RH, 0.7, 0.5, 0.92, 0.92, "Resolution in X (#mu m)", "N")
+		elif RH[0] == "RecoAllAssoc2GenMatchedMerged_ResolY":
+			RootTH1FPlot(RH[0], RH, 0.7, 0.5, 0.92, 0.92, "Resolution in Y (#mu m)", "N")

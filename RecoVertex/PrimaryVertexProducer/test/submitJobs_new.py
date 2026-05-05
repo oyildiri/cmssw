@@ -99,7 +99,7 @@ if args.run_path_list == None:
 else:
 	ParamJobs = False
 
-if args.run_path_list == None and setParam == True:
+if args.run_path_list == None and ParamJobs == True:
 	param_values = []
 	if args.params == None:
 		if args.param_num == 1:

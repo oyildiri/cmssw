@@ -107,7 +107,7 @@ if args.run_path_list != None:
 					print(rungroupPath, ": Directory does not exist")
 					sys.exit(1)
 				if s[3] == "I":
-					run_tag = str(find_max_run(rungroupPath,"run_")+1)
+					run_tag = str(find_max_run(rungroupPath,"run_"))
 					run = [s[0], s[1], s[2], s[3], None, run_tag]
 				elif s[3] == "P":
 					run_tag = "p_%s"%str(s[4])
@@ -119,7 +119,7 @@ if args.run_path_list != None:
 else:
 	for i in args.inter:
 		for a in args.algo:
-			for g in args.rungroup:
+			for g in args.group:
 				if len(args.algo)>1 and  args.group.index(g) != args.inter.index(i)*len(args.algo)+args.algo.index(a):
 					continue
 				rungroupPath = "%s/%s/%s/RUNS_%s"%(mainpath,i,a,g)
@@ -131,9 +131,9 @@ else:
 				else:
 					run_type = "I"
 				if run_type == "I":
-					run_tag = str(find_max_run(rungroupPath,"run_")+1)
+					run_tag = str(find_max_run(rungroupPath,"run_"))
 					run = [i, a, g, run_type, None, run_tag]
-					run.append("%s/%s/RUNS_%s/run_%"%(run[0],run[1],run[2],run[5]))
+					run.append("%s/%s/RUNS_%s/run_%s"%(run[0],run[1],run[2],run[5]))
 					run_list.append(run)
 				elif run_type == "P":
 					for p in param_values:
