@@ -10,23 +10,8 @@ options = VarParsing.VarParsing ('analysis')
 options.outputFile = 'output.root'
 options.inputFiles = ['input.root']
 options.maxEvents = -1 # -1 means all events
-
-options.register(
-	'bool1',
-	True,
-	VarParsing.VarParsing.multiplicity.singleton,
-	VarParsing.VarParsing.varType.bool,
-	'Use inBlocks in first iteration'
-)
-
-options.register(
-        'bool2',
-        True,
-        VarParsing.VarParsing.multiplicity.singleton,
-        VarParsing.VarParsing.varType.bool,
-        'Use inBlocks in second iteration'
-)
 options.parseArguments()
+
 process = cms.Process('PV',Run3)
 
 # import of standard configurations
@@ -90,61 +75,20 @@ process = customiseEarlyDelete(process)
 
 from RecoVertex.PrimaryVertexProducer.OfflinePrimaryVertices_cfi import offlinePrimaryVertices
 
-#####################################################################################
-## First this is the "original" 3D vertexing, identical to what we did in the past ##
-#####################################################################################
+process.offlinePrimaryVertices4D = offlinePrimaryVertices
 
-process.offlinePrimaryVertices3D = offlinePrimaryVertices
-process.offlinePrimaryVertices3D.TkClusParameters.TkDAClusParameters.runInBlocks = cms.bool(options.bool1)
-process.offlinePrimaryVertices3D.TkClusParameters.TkDAClusParameters.block_size = cms.uint32(512)
-process.offlinePrimaryVertices3D.TkClusParameters.TkDAClusParameters.overlap_frac = cms.double(0.5)
-process.offlinePrimaryVertices3D.TkClusParameters.TkDAClusParameters.mintrkweight = cms.double(0.4)
-process.offlinePrimaryVertices3D.vertexCollections = cms.VPSet(
-       [cms.PSet(label=cms.string(""),
-           algorithm=cms.string("WeightedMeanFitter"),
-           chi2cutoff = cms.double(2.5),
-           minNdof=cms.double(0.0),
-           useBeamConstraint = cms.bool(False),
-           maxDistanceToBeam = cms.double(1.0),
-           vertexTimeParameters = cms.PSet( algorithm = cms.string('fromTracksPID'))
-        ),
-        cms.PSet(label=cms.string("WithBS"),
-            algorithm = cms.string('WeightedMeanFitter'),
-            minNdof=cms.double(0.0),
-            chi2cutoff = cms.double(2.5),
-            useBeamConstraint = cms.bool(True),
-            maxDistanceToBeam = cms.double(1.0),
-            vertexTimeParameters = cms.PSet( algorithm = cms.string('fromTracksPID'))
-        )])
-
-###########################################################################################################
-## Now, we take the output from the first step (PV in 3D), and compute time of flights from input tracks ##
-########################################################################################################### 
-
-from RecoMTD.TimingIDTools.tofPIDProducer_cfi import tofPIDProducer
-process.tofUpdated =tofPIDProducer.clone(vtxsSrc='offlinePrimaryVertices3D')
-
-####################################################################################################################
-## Then we feed these traacks to the 4D vertexing, the first part is straightforward configuring the 2D vertexing ##
-####################################################################################################################
-process.offlinePrimaryVertices4D = offlinePrimaryVertices.clone()
+# Configure to use 2D clusterizer
 process.offlinePrimaryVertices4D.TkClusParameters = cms.PSet(algorithm = cms.string("DA2D_vect"),
         TkDAClusParameters = cms.PSet(
             Tmin = cms.double(4.0),
             Tpurge = cms.double(4.0),
             Tstop = cms.double(2.0),
-            mintrkweight = cms.double(0.4),
-            runInBlocks = cms.bool(options.bool2),
-            block_size = cms.uint32(512),
-            overlap_frac = cms.double(0.5) ###
         )
 )
 
-###############################################################################
-## --- Then we add the track timing we got before and configure 4D vertexing ##
-###############################################################################
-process.offlinePrimaryVertices4D.TrackTimesLabel = cms.InputTag("tofUpdated:t0safe")
-process.offlinePrimaryVertices4D.TrackTimeResosLabel = cms.InputTag("tofUpdated:sigmat0safe")
+# Add track timing
+process.offlinePrimaryVertices4D.TrackTimesLabel = cms.InputTag("trackTimeValueMapProducer","generalTracksConfigurableFlatResolutionModel")
+process.offlinePrimaryVertices4D.TrackTimeResosLabel = cms.InputTag("trackTimeValueMapProducer","generalTracksConfigurableFlatResolutionModelResolution")
 process.offlinePrimaryVertices4D.trackMTDTimeQualityVMapTag = cms.InputTag("mtdTrackQualityMVA:mtdQualMVA")
 process.offlinePrimaryVertices4D.useMVACut = cms.bool(False)
 process.offlinePrimaryVertices4D.minTrackTimeQuality = cms.double(0.8)
@@ -168,7 +112,12 @@ process.offlinePrimaryVertices4D.vertexCollections = cms.VPSet(
       ]
 )
 
+#process.tofPID4DnoPID=tofPIDProducer.clone(vtxsSrc='unsortedOfflinePrimaryVertices')
 
+process.offlinePrimaryVertices4DwithPID = process.offlinePrimaryVertices4D.clone(
+    TrackTimesLabel = "tofPID:t0safe",
+    TrackTimeResosLabel = "tofPID:sigmat0safe"
+)
 
 process.options.wantSummary = True
 
@@ -199,8 +148,9 @@ process.DQMOfflineVertex = cms.Sequence(process.pvMonitor)
 process.dqmoffline_step = cms.EndPath(process.DQMOfflineVertex)
 process.DQMoutput_step = cms.EndPath(process.DQMoutput)
 
-process.vertexing4D_step = cms.Path(process.offlinePrimaryVertices3D*process.tofUpdated*process.offlinePrimaryVertices4D)
+process.vertexing_step = cms.Path(process.offlinePrimaryVertices4D)
+process.vertexing_step_withPID = cms.Path(process.offlinePrimaryVertices4DwithPID)
 process.output_step = cms.EndPath(process.output)
 
-process.schedule = cms.Schedule(process.vertexing4D_step,process.prevalidation_step,process.dqmoffline_step,process.DQMoutput_step,process.output_step)
+process.schedule = cms.Schedule(process.vertexing_step,process.vertexing_step_withPID,process.prevalidation_step,process.dqmoffline_step,process.DQMoutput_step,process.output_step)
 

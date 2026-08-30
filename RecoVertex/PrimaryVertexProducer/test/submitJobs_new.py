@@ -131,13 +131,28 @@ if args.run_path_list != None:
 			elif s[3] == "P":
 				run_tag = "p_%s"%str(s[4])
 				run = [s[0], s[1], s[2], s[3], float(s[4]), run_tag]
+			elif s[3] == "B2":
+				if s[4]=="True":
+					bool1 = True
+				elif s[4]=="False":
+					bool1 = False
+				else:
+					sys.exit(1)
+				if s[5]=="True":
+					bool2 = True
+				elif s[5]=="False":
+					bool2 = False
+				else:
+					sys.exit(1)
+				run_tag = "%s_%s"%(str(s[4]),str(s[5]))
+				run = [s[0], s[1], s[2], s[3], [bool1, bool2], run_tag]
 			run.append("%s/%s/RUNS_%s/run_%s"%(run[0],run[1],run[2],run[5]))
 			run_list.append(run)
 else:
 	for i in args.inter:
-		for a in args.algo:
-			for g in args.group:
-				if len(args.algo)>1 and  args.group.index(g) != args.inter.index(i)*len(args.algo)+args.algo.index(a):
+		for n, a in enumerate(args.algo):
+			for m,  g in enumerate(args.group):
+				if len(args.algo) > 1 and n != m:
 					continue
 				rungroupPath = "%s/%s/%s/RUNS_%s"%(mainpath,i,a,g)
 				if os.path.exists(rungroupPath)!= True:
@@ -164,9 +179,11 @@ for r in run_list:
 	runPath = "%s/%s"%(mainpath,r[6])
 	Path(runPath).mkdir(parents=True, exist_ok=True)
 	if r[3] == "P":
-		subprocess.run(["python3","jobSubmit.py","%s_%s_%s"%(r[1],r[0],r[5]), "%s"%workarea, "%s/%s"%(workarea,get_algo_script(r[1])), "%s/%s"%(workarea, get_inter_file(r[0])), runPath,str(r[4])])
+		subprocess.run(["python3","jobSubmit.py","%s_%s_%s_%s"%(r[0],r[1],r[2],r[5]), "%s"%workarea, "%s/%s"%(workarea,get_algo_script(r[1])), "%s/%s"%(workarea, get_inter_file(r[0])), runPath, "P", str(r[4])])
 	elif r[3] == "I":
-		subprocess.run(["python3","jobSubmit.py","%s_%s"%(r[1],r[0]), "%s"%workarea, "%s/%s"%(workarea,get_algo_script(r[1])), "%s/%s"%(workarea, get_inter_file(r[0])), runPath])
+		subprocess.run(["python3","jobSubmit.py","%s_%s_%s_%s"%(r[0],r[1],r[2],r[5]), "%s"%workarea, "%s/%s"%(workarea,get_algo_script(r[1])), "%s/%s"%(workarea, get_inter_file(r[0])), runPath,"I"])
+	elif r[3] == "B2":
+		subprocess.run(["python3","jobSubmit.py","%s_%s_%s_%s"%(r[0],r[1],r[2],r[5]), "%s"%workarea, "%s/%s"%(workarea,get_algo_script(r[1])), "%s/%s"%(workarea, get_inter_file(r[0])), runPath, "B2", str(r[4][0]),  str(r[4][1])])
 	result = subprocess.run(["condor_q",user], capture_output=True, text=True)
 	print(get_batchnumber(result))
 	batch_nums.append(get_batchnumber(result))

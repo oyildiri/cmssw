@@ -6,14 +6,18 @@ import sys
 import os
 from pathlib import Path
 import shutil
+import json
 ROOT.gROOT.SetBatch(False)
-
-print(ROOT.kBlack, type(ROOT.kBlack))
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
 	"--run_path_list",
 	type=str,
+)
+
+parser.add_argument(
+	"--outputfile",
+	type=str
 )
 
 parser.add_argument(
@@ -164,6 +168,7 @@ def getbinvalue(H,run,bin):
 
 RUN_HISTP_RESULTS = []
 for r in run_list:
+	print("run: ",r)
 	f = ROOT.TFile.Open("/eos/user/o/oyildiri/OldNewCF/%s/DQM_V0001_R000000001__Global__CMSSW_X_Y_Z__RECO.root"%str(r[6]))
 	runHists = []
 	for HP in enumerate(HIST_P):
@@ -525,22 +530,36 @@ for Y in YPLOT_SORTED:
 	print(Y[1])
 
 
-pltcolors = plt.rcParams['axes.prop_cycle'].by_key()['color']
+pltcolors = [
+    "#4C72B0",  # muted blue
+    "#DD8452",  # warm orange
+    "#55A868",  # green
+    "#C44E52",  # red
+    "#8172B3",  # purple
+    "#937860",  # brown
+    "#DA8BC3",  # pink
+    "#8C8C8C",  # gray
+    "#CCB974",  # yellow-gold
+    "#64B5CD",  # light blue
+    "#2CA02C",  # bright green
+    "#17BECF",  # cyan
+    "#E377C2",  # magenta
+]
 
 for i, YS in enumerate(YPLOT_SORTED):
-	ptcolor = pltcolors[i % len(pltcolors)]
-	for P in YS[1]:
+	for j, P in enumerate(YS[1]):
+		ptcolor = pltcolors[j % len(pltcolors)]
 		if P[0][0] == "P":
 			xvalues = []
 			yvalues = []
 			for P1 in P[1]:
 				xvalues.append(P1[0][4])
 				yvalues.append(P1[1])
-			plt.plot(xvalues,yvalues,color=ptcolor,label = f"{P[0][0]}/{P[0][1]}/{P[0][2]}/{P[0][3]}")
+			plt.plot(xvalues,yvalues,color=ptcolor,label = f"{P[0][1]}")
 		elif P[0][0] == "I":
 			for P1 in P[1]:
 				yvalue = P1[1]
-				plt.axhline(y=yvalue,color=ptcolor, label = f"{P[0][0]}/{P[0][1]}/{P[0][2]}/{P[0][3]}")
+				plt.axhline(y=yvalue,color=ptcolor, label = f"{P[0][1]}")
 
 
 	# Titles, axis labels, plotting
@@ -674,7 +693,7 @@ for i, YS in enumerate(YPLOT_SORTED):
 	plt.savefig("OptPlots/%s"%plotname)
 	plt.close()
 
-if not args.only_vs_params == True:
+if not args.only_vs_param == True:
 	RUN_HIST_H = []
 	for r in run_list:
 		print(r)
@@ -824,3 +843,6 @@ if not args.only_vs_params == True:
 			RootTH1FPlot(RH[0], RH, 0.7, 0.5, 0.92, 0.92, "Resolution in X (#mu m)", "N")
 		elif RH[0] == "RecoAllAssoc2GenMatchedMerged_ResolY":
 			RootTH1FPlot(RH[0], RH, 0.7, 0.5, 0.92, 0.92, "Resolution in Y (#mu m)", "N")
+
+with open(f"{args.outputfile}.json", "w") as f:
+	json.dump({"RUN_HISTP_RESULTS":RUN_HISTP_RESULTS,"RUN_HIST_H":RUN_HIST_H},f)

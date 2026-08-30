@@ -72,7 +72,7 @@ process.output = cms.OutputModule("PoolOutputModule",
         filterName = cms.untracked.string('')
     ),
     fileName = cms.untracked.string(options.outputFile), # output file name
-    outputCommands = cms.untracked.vstring('drop *','keep *_*_*_PV', 'keep *_genPUProtons_*_*', 'keep *_prunedTrackingParticles_*_*', 'keep *_generalTracks_*_*', 'drop *_tpClusterProducer_*_*'),# I.e., just drop everything and keep things in this module
+    outputCommands = cms.untracked.vstring('drop *'),#'keep *_*_*_PV', 'keep *_genPUProtons_*_*', 'keep *_prunedTrackingParticles_*_*', 'keep *_generalTracks_*_*', 'drop *_tpClusterProducer_*_*'),# I.e., just drop everything and keep things in this module
     splitLevel = cms.untracked.int32(0)
 )
 

@@ -5,6 +5,7 @@ import math
 import time
 import stat
 import sys
+import argparse
 print()
 print('START')
 print()
@@ -19,15 +20,23 @@ NumberOfJobs = -1
 
 #logdir = "/eos/user/o/oyildiri/logfiles"
 
-setParam = False
+#setParam = True
 
 tag       = str(sys.argv[1]) # To identify the temporary run folder
 workarea  = str(sys.argv[2]) # The place where your test scripts are, so we can cd there
 script    = str(sys.argv[3]) # The script to execute with cmsRun
 file_list = str(sys.argv[4]) # The txt with all input files
 output    = str(sys.argv[5]) # Where do we put it
-if setParam == True:
-	param = str(sys.argv[6]) # Parameter in the algorithm that is set 
+job_type  = str(sys.argv[6])
+if job_type == "P":
+	param = str(sys.argv[7])
+elif job_type == "B2":
+	B1 = str(sys.argv[7])
+	B2 = str(sys.argv[8])
+
+#if setParam == True:
+#	param = str(sys.argv[6]) # Parameter in the algorithm that is set 
+
 
 ########   customization end   #########
 
@@ -74,11 +83,16 @@ for x in range(1, int(NumberOfJobs) + 1):
 		fout.write("source /cvmfs/cms.cern.ch/cmsset_default.sh\n")
 		fout.write("cd %s\n"%workarea)
 		fout.write("cmsenv\n")
-		if setParam == True:
+		if job_type == "P":
 			for f in jobFiles:
 				fout.write("rm %s\n"%(output + "/" + f.split("/")[-1].replace(".root","_output.root")))
 				fout.write("rm %s\n"%(output + "/" + f.split("/")[-1].replace(".root","_output_DQM.root")))
 				fout.write("cmsRun %s inputFiles=%s outputFile=%s param=%s\n"%(script, f, output + "/" + f.split("/")[-1].replace(".root","_output.root"),param))
+		elif job_type == "B2":
+			for f in jobFiles:
+				fout.write("rm %s\n"%(output + "/" + f.split("/")[-1].replace(".root","_output.root")))
+				fout.write("rm %s\n"%(output + "/" + f.split("/")[-1].replace(".root","_output_DQM.root")))
+				fout.write("cmsRun %s inputFiles=%s outputFile=%s bool1=%s bool2=%s\n"%(script, f, output + "/" + f.split("/")[-1].replace(".root","_output.root"),B1,B2))
 		else: 
 			for f in jobFiles:
 				fout.write("rm %s\n"%(output + "/" + f.split("/")[-1].replace(".root","_output.root")))

@@ -18,11 +18,15 @@ def get_algo_script(x):
                 return "testCPU_PU200.py"
         elif x == "new2CnewF":
                 return "testCPU_PU200_tkwt0p25.py"
+        elif x == "4DinBlocks":
+                return "PrimaryVertexProducer4D_inBlocks.py"
+        elif x == "4D":
+                return "PrimaryVertexProducer4D.py"
         else:
              	return None
 
 def get_inter_file(x):
-	interactions = ["Hinv", "QCD", "TTto2l2nu", "TT", "Upsilon", "Wprimetolnu", "Wtolnu", "Wtomunu", "Zprimetoee", "Zprimetomm", "Ztoee", "Ztomm", "Ztott"]
+	interactions = ["TT1","Wtolnu_180","Wprimetolnu_180","Hinv", "QCD", "TTto2l2nu", "TT", "Upsilon", "Wprimetolnu", "Wtolnu", "Wtomunu", "Zprimetoee", "Zprimetomm", "Ztoee", "Ztomm", "Ztott"]
 	if x in interactions:
 		return "%s.txt"%x
 #        elif x == "Z":

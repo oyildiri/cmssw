@@ -8,20 +8,27 @@
 #include <cassert>
 #include <limits>
 #include <iomanip>
+
 #include "FWCore/Utilities/interface/isFinite.h"
 #include "vdt/vdtMath.h"
+
+#include <iostream>
+#include <vector>
+#include <fstream>
+#include <algorithm>
+#include <utility>
 
 using namespace std;
 
 //#define DEBUG
 #ifdef DEBUG
-#define DEBUGLEVEL 0
+#define DEBUGLEVEL 5
 #endif
 
 DAClusterizerInZT_vect::DAClusterizerInZT_vect(const edm::ParameterSet& conf) {
   // hardcoded parameters
   maxIterations_ = 1000;
-  mintrkweight_ = 0.5;
+  mintrkweight_ = conf.getParameter<double>("mintrkweight");
 
   // configurable debug output
 #ifdef DEBUG
@@ -1121,6 +1128,203 @@ vector<TransientVertex> DAClusterizerInZT_vect::vertices(const vector<reco::Tran
     return vertices_no_blocks(tracks);
 }
 
+std::pair<std::vector<unsigned int>, std::vector<unsigned int>> boundDensityCorrection(double hwidth, unsigned int allowedDisp, unsigned int buffer, unsigned int nIter, std::vector<double> sorted_tracks_z,
+                                                                                       unsigned int block_size_, double overlap_frac_, unsigned int nBlocks)
+{
+    std::cout << std::setprecision(17)
+          << "BOUND DENSITY PARAMETERS:"
+          << " hwidth=" << hwidth
+          << " allowedDisp=" << allowedDisp
+          << " buffer=" << buffer
+          << " nIter=" << nIter
+          << " block_size=" << block_size_
+          << " overlap=" << overlap_frac_
+          << " nBlocks=" << nBlocks
+          << " nTracks=" << sorted_tracks_z.size()
+          << std::endl;
+    // make histogram
+    unsigned int nbins = std::ceil((sorted_tracks_z.back() - sorted_tracks_z[0]) / hwidth);
+    std::vector<unsigned int> hist(nbins,0);
+    std::vector<double> denshist;
+
+    for (double t : sorted_tracks_z){
+        unsigned int bin = std::floor((t - sorted_tracks_z[0]) / hwidth);
+        hist[bin] += 1;
+    }
+    for (unsigned int h : hist){
+        double hdensity = static_cast<double>(h) / sorted_tracks_z.size();
+        denshist.push_back(hdensity);
+    }
+    for (size_t k = 0; k < hist.size(); ++k) {
+        if (hist[k] != 0) {
+            std::cout << k << " " << hist[k] << '\n';
+        }
+    }
+    std::vector<unsigned int> boundindmix;
+    std::vector<unsigned int> boundariesbeginindex;
+    std::vector<unsigned int> boundariesendindex;
+    std::vector<std::vector<unsigned int>> mixedset;
+    // initial boundaries
+    for (unsigned int block=0; block < nBlocks; block++){
+        unsigned int begin = (unsigned int)(block * block_size_ * (1 - overlap_frac_));
+        unsigned int end = (unsigned int)std::min(begin + block_size_, (unsigned int)sorted_tracks_z.size());
+        boundariesbeginindex.push_back(begin);
+        boundariesendindex.push_back(end);
+        boundindmix.push_back(begin);
+        boundindmix.push_back(end);
+    }
+    for (unsigned int i=0; i < boundariesbeginindex.size(); i++){
+        std::cout << boundariesbeginindex[i] << "," << boundariesendindex[i] << std::endl;
+    }
+    std::sort(boundindmix.begin(), boundindmix.end());
+    mixedset.push_back(boundindmix);
+    // start correction
+    for (unsigned int i = 0; i < nIter; i++){
+        //remove duplicates at the end
+        std::vector<unsigned int> cutboundindmix = boundindmix;
+        unsigned int last = cutboundindmix.back();
+        size_t l = cutboundindmix.size() - 1;
+        while (l > 0 && cutboundindmix[l - 1] == last) {
+            --l;
+        }
+        cutboundindmix.resize(l + 1);
+        for (unsigned int v = 0; v < cutboundindmix.size(); v++){
+            std::cout << cutboundindmix[v] << std::endl;
+        }
+        for (size_t j = 0; j < cutboundindmix.size(); j++){
+            unsigned int m;
+            unsigned int b = cutboundindmix[j];
+            auto mbeg = std::find(boundariesbeginindex.begin(),boundariesbeginindex.end(), b);
+            auto mend = std::find(boundariesendindex.begin(),boundariesendindex.end(), b);
+            unsigned int lowerlim;
+            unsigned int higherlim;
+            unsigned int lowerbin;
+            unsigned int higherbin;
+            bool boundBeg;
+            if (mbeg != boundariesbeginindex.end()){
+                m = mbeg - boundariesbeginindex.begin();
+                boundBeg = true;
+            }
+            else if (mend != boundariesendindex.end()){
+                m = mend - boundariesendindex.begin();
+                boundBeg = false;
+            }
+            if (j == 0 || j == cutboundindmix.size() - 1){
+                continue;
+            }
+            else {
+                unsigned int bestdist = std::numeric_limits<unsigned int>::max();
+                size_t rightInd = 0;
+                for (size_t k = 0; k < cutboundindmix.size(); ++k) {
+                    unsigned int d;
+                    if (cutboundindmix[k] >= cutboundindmix[j]) {
+                        d = cutboundindmix[k] - cutboundindmix[j];
+                        if (d > 0 && d < bestdist){
+                            bestdist = d;
+                            rightInd = k;
+                        }
+                    }
+                }
+                if (cutboundindmix[j] + allowedDisp < cutboundindmix[rightInd] - buffer || cutboundindmix[j] == cutboundindmix[rightInd] - buffer){
+                    higherlim = cutboundindmix[j] + allowedDisp;
+                }
+                else {
+                    higherlim = cutboundindmix[rightInd] - buffer;
+                }
+                bestdist = std::numeric_limits<unsigned int>::max();
+                size_t leftInd = 0;
+                for (size_t k = 0; k < cutboundindmix.size(); ++k) {
+                    unsigned int d;
+                    if (cutboundindmix[j] >= cutboundindmix[k]) {
+                        d = cutboundindmix[j] - cutboundindmix[k];
+                        if (d > 0 && d < bestdist){
+                            bestdist = d;
+                            leftInd = k;
+                        }
+                    }
+                }
+                if (cutboundindmix[j] - allowedDisp > cutboundindmix[leftInd] + buffer || cutboundindmix[j] == cutboundindmix[leftInd] + buffer){
+                    lowerlim = cutboundindmix[j] - allowedDisp;
+                }
+                else {
+                    lowerlim = cutboundindmix[leftInd] + buffer;
+                }
+                if (lowerlim > higherlim) {
+                    continue;
+                }
+                //find considered densities
+                unsigned int n;
+                n = 0;
+                for (size_t k = 0; k < hist.size(); k++){
+                    n += hist[k];
+                    if (n >= lowerlim){
+                        lowerbin = k;
+                        break;
+                    }
+                }
+                n = 0;
+                for (size_t k = 0; k < hist.size(); k++){
+                    n += hist[k];
+                    if (n >= higherlim){
+                        higherbin = k;
+                        break;
+                    }
+                }
+                std::vector<double> consDens(denshist.begin() + lowerbin, denshist.begin() + higherbin + 1);
+                //find closest minimum denisty bin
+                double minVal = *std::min_element(consDens.begin(), consDens.end());
+                size_t relminDensbin = 0;
+                size_t bestDist = std::numeric_limits<size_t>::max();
+                for (size_t k = 0; k < consDens.size(); ++k){
+                    if (consDens[k] == minVal) {
+                        size_t dist = std::abs(static_cast<int>(k) - static_cast<int>(boundindmix[j]));
+                        if (dist < bestDist) {
+                            bestDist = dist;
+                            relminDensbin = k;
+                        }
+                    }
+                }
+                unsigned int minDensbin = lowerbin + relminDensbin;
+                //find lower and higher limits of the bin
+                unsigned int binlower;
+                n = 0;
+                for (size_t k = 0; k < hist.size(); k++){
+                    if (k == minDensbin){
+                        binlower = n;
+                        break;
+                    }
+                    n += hist[k];
+                }
+                unsigned int binhigher = binlower + hist[minDensbin] - 1;
+                //find the final new boundary position
+                unsigned int candidate_lower;
+                unsigned int candidate_higher;
+                if (minDensbin == lowerbin){
+                    candidate_lower = lowerlim;
+                    candidate_higher = binhigher + 1;
+                }
+                else if (minDensbin == higherbin){
+                    candidate_lower = binlower;
+                    candidate_higher = higherlim + 1;
+                }
+                else{
+                    candidate_lower = binlower;
+                    candidate_higher = binhigher + 1;
+                }
+                unsigned int newbound = (candidate_lower + candidate_higher) / 2;
+                boundindmix[j] = newbound;
+                if (boundBeg == true){
+                    boundariesbeginindex[m] = newbound;
+                }
+                else{
+                    boundariesendindex[m] = newbound;
+                }
+            }
+        }
+    }
+    return {boundariesbeginindex, boundariesendindex};
+}
+
 vector<TransientVertex> DAClusterizerInZT_vect::vertices_in_blocks(const vector<reco::TransientTrack>& tracks) const {
   // Tracks are sorted in z before splitting into blocks
   vector<reco::TransientTrack> sorted_tracks;
@@ -1145,12 +1349,45 @@ vector<TransientVertex> DAClusterizerInZT_vect::vertices_in_blocks(const vector<
         << "Warning nBlocks was 0 with ntracks = " << sorted_tracks.size() << " block_size = " << block_size_
         << " and overlap fraction = " << overlap_frac_ << ". Setting nBlocks = 1";
   }
-
   // Run DA for each block
+  bool denseCorr = true;
+  std::vector<unsigned int> boundbegins;
+  std::vector<unsigned int> boundends;
+  if (denseCorr){
+    double hwidth = 0.1;
+    unsigned int allowedDisp = 40;
+    unsigned int buffer = 50;
+    unsigned int nIter = 5;
+    std::vector<double> sorted_tracks_z;
+    sorted_tracks_z.reserve(sorted_tracks.size());
+    for (const auto& track : sorted_tracks) {
+      double z = track.stateAtBeamLine().trackStateAtPCA().position().z();
+      sorted_tracks_z.push_back(z);
+    }
+//    for (unsigned int t = 0; t < sorted_tracks_z.size(); t++){
+//      std::cout << sorted_tracks_z[t] << std::endl;
+//    }
+    for (double z : sorted_tracks_z) {
+    std::cout << std::setprecision(17) << z << '\n';
+    }
+    auto bounds = boundDensityCorrection(hwidth, allowedDisp, buffer, nIter, sorted_tracks_z, block_size_, overlap_frac_, nBlocks);
+    boundbegins = bounds.first;
+    boundends = bounds.second;
+  }
+  std::cout << "BLOCS:" << std::endl;
   for (unsigned int block = 0; block < nBlocks; block++) {
     vector<reco::TransientTrack> block_tracks;
-    unsigned int begin = (unsigned int)(block * block_size_ * (1 - overlap_frac_));
-    unsigned int end = (unsigned int)std::min(begin + block_size_, (unsigned int)sorted_tracks.size());
+    unsigned int begin;
+    unsigned int end;
+    if (denseCorr == true){
+      begin = boundbegins[block];
+      end = boundends[block];
+      std::cout << begin << " , " << end << std::endl;
+    }
+    else{
+      begin = (unsigned int)(block * block_size_ * (1 - overlap_frac_));
+      end = (unsigned int)std::min(begin + block_size_, (unsigned int)sorted_tracks.size());
+    }
     for (unsigned int i = begin; i < end; i++) {
       block_tracks.push_back(sorted_tracks[i]);
     }

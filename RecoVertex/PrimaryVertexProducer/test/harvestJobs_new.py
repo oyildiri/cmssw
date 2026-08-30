@@ -98,29 +98,43 @@ if args.omit_last_param == True:
 # Make run list
 run_list = []
 if args.run_path_list != None:
-	try:
-		with open(args.run_path_list) as list:
-			for line in list:
-				s = line.split("/")
-				rungroupPath = "%s/%s/%s/RUNS_%s"%(mainpath,s[0],s[1],s[2])
-				if os.path.exists(rungroupPath)!= True:
-					print(rungroupPath, ": Directory does not exist")
+	with open(args.run_path_list) as list:
+		for line in list:
+			s = line.rstrip().split("/")
+			rungroupPath = "%s/%s/%s/RUNS_%s"%(mainpath,s[0],s[1],s[2])
+			if os.path.exists(rungroupPath)!= True:
+				print(rungroupPath, ": Directory does not exist")
+				sys.exit(1)
+			if s[3] == "I":
+				run_tag = str(find_max_run(rungroupPath,"run_"))
+				run = [s[0], s[1], s[2], s[3], None, run_tag]
+			elif s[3] == "P":
+				run_tag = "p_%s"%str(s[4])
+				run = [s[0], s[1], s[2], s[3], float(s[4]), run_tag]
+			elif s[3] == "B2":
+				if s[4]=="True":
+					bool1 = True
+				elif s[4]=="False":
+					bool1 = False
+				else:
+					print("error 1")
 					sys.exit(1)
-				if s[3] == "I":
-					run_tag = str(find_max_run(rungroupPath,"run_"))
-					run = [s[0], s[1], s[2], s[3], None, run_tag]
-				elif s[3] == "P":
-					run_tag = "p_%s"%str(s[4])
-					run = [s[0], s[1], s[2], s[3], float(s[4]), run_tag]
-				run.append("%s/%s/RUNS_%s/run_%s"%(run[0],run[1],run[2],run[5]))
-				run_list.append(run)
-	except:
-		sys.exit(1)
+				if s[5]=="True":
+					bool2 = True
+				elif s[5]=="False":
+					bool2 = False
+				else:
+					print("error 2")
+					sys.exit(1)
+				run_tag = "%s_%s"%(str(s[4]),str(s[5]))
+				run = [s[0], s[1], s[2], s[3], [bool1, bool2], run_tag]
+			run.append("%s/%s/RUNS_%s/run_%s"%(run[0],run[1],run[2],run[5]))
+			run_list.append(run)
 else:
 	for i in args.inter:
-		for a in args.algo:
-			for g in args.group:
-				if len(args.algo)>1 and  args.group.index(g) != args.inter.index(i)*len(args.algo)+args.algo.index(a):
+		for n, a in enumerate(args.algo):
+			for m,  g in enumerate(args.group):
+				if len(args.algo) > 1 and n != m:
 					continue
 				rungroupPath = "%s/%s/%s/RUNS_%s"%(mainpath,i,a,g)
 				if os.path.exists(rungroupPath)!= True:
