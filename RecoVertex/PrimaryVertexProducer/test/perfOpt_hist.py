@@ -106,12 +106,16 @@ for H in HIST_H:
 				h = f.Get("DQMData/Run 1/Vertexing/Run summary/PrimaryVertexV/offlinePrimaryVertices/%s"%H)
 		print(H)
 		h.SetDirectory(0)
+# LABELS HERE
 		if r[3] == "P":
-			label = f"{r[0]}/{r[1]}/{r[4]:.3f}"
+			label = f"mintrkweight={r[4]:.3f}"
 		elif r[3] == "I":
-			label = f"{r[0]}/{r[1]}"
-		elif r[3] == "B2":
-			label = f"{r[0]}/{r[1]}/{r[4]}/{r[2]}"
+			label = f"New inBlocks"
+		elif r[3] == "B2":   #default: {r[0]}/{r[1]}/{r[4]}/{r[2]}
+			if r[4] == [False, False]:
+				label = "Without inBlocks"
+			elif r[4]==[True,True]:
+				label = "Old inBlocks"
 		result = [r,h,label]
 		h_results.append(result)
 	RUN_HIST_H.append([H, h_results])
@@ -223,7 +227,7 @@ path = f"{workarea}/OptPlots_HIST/{foldername}"
 Path(path).mkdir(parents=True, exist_ok=True)
 for RH in RUN_HIST_H:
 	if RH[0] == "RecoAllAssoc2Gen_NumTracks":
-		RootTH1FPlot(foldername,RH[0], RH, 0.5, 0.5, 0.92, 0.92, "Number of tracks in vertex fit", "N")
+		RootTH1FPlot(foldername, RH[0], RH, 0.5, 0.5, 0.92, 0.92, "Number of tracks in vertex fit", "N")
 	elif RH[0] == "RecoAllAssoc2Gen_X":
 		RootTH1FPlot(foldername,RH[0], RH, 0.6, 0.4, 0.92, 0.92, "Reco vertex pos x (cm)", "N")
 	elif RH[0] == "RecoAllAssoc2Gen_Y":
